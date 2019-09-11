@@ -30,4 +30,4 @@ The following table lists the actions that generate an event:
 
 Actions  |	Description
 --- | ---
-sql-query.sql_job.create | 	An SQL query was submitted.
+sql-query.sql_job.create | 	A SQL query was submitted.

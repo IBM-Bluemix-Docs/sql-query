@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-08-01"
+lastupdated: "2019-09-25"
 
 ---
 
@@ -38,7 +38,7 @@ The general syntax of an SQL query statement is outlined below using the `query`
 
 <h3 id="query">query</h3>
 
-<!--include-svg src="./svgfiles/query.svg" target="./diagrams/query.svg" alt="syntax diagram for a query" layout="" -->
+<!--include-svg src="./svgfiles/query.svg" target="./diagrams/query.svg" alt="syntax diagram for a query" layout="@break@" -->
 
 <h3 id="namedQuery">namedQuery</h3>
 
@@ -114,9 +114,9 @@ FROM products WHERE price > (SELECT * FROM avg_product_price)
 | 12        | 400   |  97.5     | 302.5      |
 <!--table-caption title="Query result for example 'list products with a price above the average price'"-->
 
-<h3 id="resultClause">resultClause</h3>
+<h3 id="cosResultClause">cosResultClause</h3>
 
-You can use the result clause to apply detailed control over the location, format and layout of the SQL query result set being stored.
+You can use the Cloud {{site.data.keyword.cos_short}} result clause to apply detailed control over the location, format and layout of the SQL query result set being stored on Cloud {{site.data.keyword.cos_short}}.
 
 The default is `JOBPREFIX JOBID`, which means that `jobid=` is always appended to the target prefix.
 You can optionally specify `JOBID NONE`, which skips the appending of `jobid=`. This means that the results are written
@@ -128,7 +128,7 @@ The reason is that data cannot be overwritten by a query that is reading that sa
 For example, `SELECT * FROM cos://us-geo/mybucket/myprefix/mysubprefix INTO cos://us-geo/mybucket/myprefix JOBPREFIX NONE`
 will return an error when trying to submit it.
 
-<!--include-svg src="./svgfiles/resultClause.svg" target="./diagrams/resultClause.svg" alt="syntax diagram for a result clause" layout="@break@" -->
+<!--include-svg src="./svgfiles/cosResultClause.svg" target="./diagrams/cosResultClause.svg" alt="syntax diagram for a COS result clause" layout="@break@" -->
 
 <h3 id="partitionedClause">partitionedClause</h3>
 
@@ -145,7 +145,7 @@ When specified without the PARTITIONED clause, it is equivalent to an ORDER BY c
 
 <!--include-svg src="./svgfiles/sortClause.svg" target="./diagrams/sortClause.svg" alt="syntax diagram for a result partitioned column clause" layout="@break@" -->
 
-The *query result clause* lets you explicitly specify the storage location and type of a query result.
+The *COS result clause* lets you explicitly specify the storage location and type of a query result on Cloud {{site.data.keyword.cos_short}}.
 The storage location is specified by means of a `COSURI`.
 
 Valid query result object types are: `AVRO`, `CSV`, `JSON`, `ORC`, or `PARQUET`. Note that object type names are not case sensitive.
@@ -186,7 +186,7 @@ Some additional remarks on Hive-style partitioning:
 2. Hive-style partitions do not contain any values for partition columns since their values are *stored* in the object prefix of the partition.
 Thus, note that if you copy a HIVE-style partition and rename the object prefix by removing the partition column values, you are loosing data.
 3. Hive-style partitions can have a tendency for data skewing, for example, the partition representing order data from Malta is very likely much smaller
-than the partition representing order data from the USA. You can partition the query result into separate objects if you want to have *equally-sized* partitions.   
+than the partition representing order data from the USA. You can partition the query result into separate objects if you want to have *equally-sized* partitions.
 
 
 <h4>Partition by columns into objects</h4>
@@ -210,10 +210,33 @@ Using the `PARTITIONED EVERY x ROWS` clause on a sorted query result ensures tha
 
 Note that using `PARTITIONED EVERY x ROWS` clause causes data to be written single-threaded to Cloud {{site.data.keyword.cos_short}}, that is no parallel I/O is performed to write query results to Cloud {{site.data.keyword.cos_short}}.
 
+<h3 id="dbResultClause">dbResultClause</h3>
+
+You can use the Db result clause to specify that query results should be stored as a relational database table in {{site.data.keyword.Bluemix_notm}}.
+Currently, {{site.data.keyword.Db2_on_Cloud_long}} is the only supported target database.
+
+Storing query results in a database will create a new table with the columns determined by the query result. When writing to Db2,
+the following type mapping rules apply:
+ * String types are mapped to CLOB columns.
+ * Struct types are not mapped and have to be flattened first. See the `FLATTEN` [table transformation function](#tableTransformer).
+ * Arrays, timeseries, and spatial data types are not mapped and have to be converted with appropriate SQL functions.
+
+The table name and optional schema are specified as part of the target URI.
+**Important**: If a table with the given name already exists in the target database, that table is dropped before the query executes
+and all existing data is deleted.
+
+You can use the `PARALLELISM x` clause to specify that multiple parallel database connections should be opened to write out
+the result. Depending on the size of your result and the network connectivity of your target database service,
+this can reduce the query processing time significantly.
+
+<!--include-svg src="./svgfiles/dbResultClause.svg" target="./diagrams/dbResultClause.svg" alt="syntax diagram for a Db2 result clause" layout="@break@" -->
+
 <h3>More Topics</h3>
 
 For further details about clauses used in a *query*, refer to the following topics:
 * [COSURI](#COSURI)
+* [CRN_TABLE](#CRN_TABLE)
+* [DB2_TABLE_URI](#DB2_TABLE_URI)
 * [fullselect](#fullselect)
 * [identifier](#identifier)
 * [namedQuery](#namedQuery)
@@ -226,6 +249,7 @@ A *query* is referenced by the following clauses:
 * [namedQuery](#namedQuery)
 * [predicate](#predicate)
 * [primaryExpression](#primaryExpression)
+
 
 ## Fullselect Clause
 {: #chapterFullSelectClause}
@@ -636,20 +660,20 @@ Apart from the join type, the following two different flavors of joins exist:
 An external table specification represents an URI for an object stored on Cloud {{site.data.keyword.cos_short}} combined with a specification of the object type.
 Valid values for object type identifier are `AVRO`, `CSV`, `JSON`, `ORC`, or `PARQUET`.
 If the file format is CVS, the optional `FIELDS TERMINATED BY` <character> clause
-allows you to specify a field delimiter/separator other than the default `,` (comma).  
+allows you to specify a field delimiter/separator other than the default `,` (comma).
 
-For example, the query for parsing a CSV with '|' as delimiter looks like the following:  
+For example, the query for parsing a CSV with '|' as delimiter looks like the following:
 
-`SELECT * FROM cos://us-geo/sql/BlackFriday.csv STORED AS CSV FIELDS TERMINATED BY '|' limit 3`  
+`SELECT * FROM cos://us-geo/sql/BlackFriday.csv STORED AS CSV FIELDS TERMINATED BY '|' limit 3`
 
 All one-character Unicode characters are allowed as delimiters.
 If the format of the input files is CSV and the files don't have a header line (by default a header line is assumed), the optional `NOHEADER` keyword
 allows you to specify that the files don't have a header line.
 Refer to section [COS URI](#COSURI) for more details.
 
-If the file format is PARQUET, the optional MERGE SCHEMA clause allows you to handle Parquet schema evolution by specifying that all qualifying Parquet objects 
-should be scanned for their schema and final schema should be merged across all objects. Note that by default, for Parquet input only the first Parquet object 
-found is used to infer the schema, which guarantees minimal overhead for compiling the SQL. Thus, use this option if your Parquet input data does not 
+If the file format is PARQUET, the optional MERGE SCHEMA clause allows you to handle Parquet schema evolution by specifying that all qualifying Parquet objects
+should be scanned for their schema and final schema should be merged across all objects. Note that by default, for Parquet input only the first Parquet object
+found is used to infer the schema, which guarantees minimal overhead for compiling the SQL. Thus, use this option if your Parquet input data does not
 have homogeneous schema.
 
 <!--include-svg src="./svgfiles/externalTableSpec.svg" target="./diagrams/externalTableSpec.svg" alt="syntax diagram for an external table specification" layout="" -->
@@ -658,32 +682,32 @@ have homogeneous schema.
 
 A table transformer is a function that is applied to the input data set before it is sent to the actual SQL query compilation and execution.
 
-You can wrap your external table definition optionally with the `FLATTEN` table transformation function. 
-It will preprocess your input table before query compilation to a fully flat column schema. 
-This can be useful when you have hierarchical input data as it is often found in JSON documents. 
-By using `FLATTEN`, you don't have to dereference all nested columns explicitly in your SQL statement. 
+You can wrap your external table definition optionally with the `FLATTEN` table transformation function.
+It will preprocess your input table before query compilation to a fully flat column schema.
+This can be useful when you have hierarchical input data as it is often found in JSON documents.
+By using `FLATTEN`, you don't have to dereference all nested columns explicitly in your SQL statement.
 
-For example, you can run a simple `SELECT * FLATTEN(cos://us-geo/sql/iotmessages STORED AS JSON)` on a flattened JSON input and use CSV output to easily browse a sample of your JSON input data. 
+For example, you can run a simple `SELECT * FLATTEN(cos://us-geo/sql/iotmessages STORED AS JSON)` on a flattened JSON input and use CSV output to easily browse a sample of your JSON input data.
 
-The `FLATTEN` table transformation function creates a flat list of columns by concatenating all nested column names with _. 
+The `FLATTEN` table transformation function creates a flat list of columns by concatenating all nested column names with _.
 You can optionally also combine `FLATTEN` with `CLEANCOLS`.
 
-You can wrap your external table definition optionally with the `CLEANCOLS` table transformation function. 
-It will preprocess your input table before query compilation by renaming all columns that have characters that are NOT supported by certain target formats, such as Parquet. 
-These characters are `, ; ,,, =, (, ), { and }`. They are replaced by the corresponding URL-encoded representation, for example, %20 for space (` `). This allows you to write results, for example, into Parquet without having to provide column by column alias names in your SQL 
-when your input data has columns with these characters. A typical situation is the existence of space (` `) in input columns. 
+You can wrap your external table definition optionally with the `CLEANCOLS` table transformation function.
+It will preprocess your input table before query compilation by renaming all columns that have characters that are NOT supported by certain target formats, such as Parquet.
+These characters are `, ; ,,, =, (, ), { and }`. They are replaced by the corresponding URL-encoded representation, for example, %20 for space (` `). This allows you to write results, for example, into Parquet without having to provide column by column alias names in your SQL
+when your input data has columns with these characters. A typical situation is the existence of space (` `) in input columns.
 
-For example, you can use `SELECT * CLEANCOLS(cos://us-geo/sql/iotmessages STORED AS JSON)` to produce a result set that can be stored as is into Parquet target format. 
+For example, you can use `SELECT * CLEANCOLS(cos://us-geo/sql/iotmessages STORED AS JSON)` to produce a result set that can be stored as is into Parquet target format.
 
 You can optionally also combine `CLEANCOLS` with `FLATTEN`.
 
 If you wrap your external table definition with the `DESCRIBE` table transformer,
 the table does not show its actual content but the schema that is inferred from the objects in {{site.data.keyword.cos_full}} instead.
-This allows you to explore the schema before authoring your actual SQL statements against it. 
+This allows you to explore the schema before authoring your actual SQL statements against it.
 
-When you use the `DESCRIBE` table transformer in your SQL statement, the default output format is JSON instead of CSV. 
+When you use the `DESCRIBE` table transformer in your SQL statement, the default output format is JSON instead of CSV.
 
-You can also wrap `DESCRIBE` around the other table transformers in order to explore the transformed table schema. 
+You can also wrap `DESCRIBE` around the other table transformers in order to explore the transformed table schema.
 However, you cannot wrap other table transformers around the `DESCRIBE` transformer.
 
 <!--include-svg src="./svgfiles/tableTransformer.svg" target="./diagrams/tableTransformer.svg" alt="syntax diagram for an table transformer" layout="" -->
@@ -723,7 +747,7 @@ A *values clause* is a component of a *fullselect* or represents a *primary rela
 
 A values clause lets you define a result set by specifying actual values for each column of a row by means of expressions.
 
-Each `expression` in the list of expressions represents a row of the result set that is defined.  
+Each `expression` in the list of expressions represents a row of the result set that is defined.
 
 In case of a single-column result set, each expression represents the value of this column in a row.
 
@@ -870,7 +894,7 @@ The semantics of the entities in order of appearance in the syntax diagrams is a
 * `qualifiedName`: Name of a table-generating function.
 * `expression`: An expression resolving to an array.
 * `identifier`: Lateral view name, that is, the name of the new virtual table.
-* `identifier`: Lateral view column names.  
+* `identifier`: Lateral view column names.
 
 <h3>Examples</h3>
 
@@ -1104,7 +1128,7 @@ FROM
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |L_COL1|L_COL2|R_COL1|R_COL2|
 |------|------|------|------|
@@ -1127,7 +1151,7 @@ FROM
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |L_COL1|L_COL2|R_COL1|R_COL2|
 |------|------|------|------|
@@ -1176,7 +1200,7 @@ FROM
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |L_COL1|L_COL2|
 |------|------|
@@ -1202,7 +1226,7 @@ FROM
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |L_COL1|L_COL2|
 |------|------|
@@ -1384,7 +1408,7 @@ WHERE rank <= 2
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |EMP_ID|DEPT_ID|POSTS|RANK|
 |------|-------|-----|----|
@@ -1422,7 +1446,7 @@ SELECT * FROM (
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |EMP_ID|DEPT_ID|POSTS|RANK|
 |------|-------|-----|----|
@@ -1447,7 +1471,7 @@ The `CUME_DIST()` function returns the percentage of rows having a value less th
 ```sql
 -- cumulative distribution of transaction amounts
 SELECT
-    txn_amount,  
+    txn_amount,
     MAX(balance_dist)
 FROM (
         SELECT
@@ -1471,7 +1495,7 @@ GROUP BY txn_amount
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |TXN_AMOUNT|MAX(BALANCE_DIST) |
 |----------|------------------|
@@ -1517,7 +1541,7 @@ WINDOW current_balance AS (
 {: codeblock}
 
 
-The result of the example query is shown in the following table.    
+The result of the example query is shown in the following table.
 
 |TXN_ID|ACCOUNT|TXN_AMOUNT|BALANCE|
 |------|-------|----------|-------|
@@ -1684,7 +1708,7 @@ FROM VALUES ("dummy")
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |PAST_TIMESTAMP         |
 |-----------------------|
@@ -1729,7 +1753,7 @@ FROM ts
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 | LONG_VERSION            | SHORT_VERSION           |
 |-------------------------|-------------------------|
@@ -1750,7 +1774,7 @@ FROM ts
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 | LONG_VERSION           | SHORT_VERSION           |
 |------------------------|-------------------------|
@@ -1780,11 +1804,9 @@ For further details about the clauses used by a *primary expression*, refer to t
 * [castExpression](#castExpression)
 * [constant](#constant)
 * [columnReference](#columnReference)
-* [DECIMAL_VALUE](#DECIMAL_VALUE),
 * [expression](#expression)
 * [functionOrAggregate](#functionOrAggregate)
 * [identifier](#identifier)
-* [INTEGER_VALUE](#INTEGER_VALUE)
 * [number](#number)
 * [query](#query)
 * [STRING](#STRING)
@@ -1826,7 +1848,7 @@ The `IS DISTINCT FROM` predicate compares two expressions and evaluates to TRUE 
 | :----| :---- | :---- |
 | Both inputs are non-null. | Evaluates to TRUE if the inputs are not identical and FALSE if they are. Equivalent to the <> operator. | Evaluates to FALSE if the inputs are not identical and TRUE if they are. Equivalent to the = operator. |
 | One input is null. | Evaluates to TRUE. | Evaluates to FALSE. |
-| Both inputs are null. | Evaluates to FALSE. | Evaluates to TRUE. |  
+| Both inputs are null. | Evaluates to FALSE. | Evaluates to TRUE. |
 <!--table-caption title="NULL Values and DISTINCT Predicate Value"-->
 
 The following DISTINCT predicates are logically equivalent to the corresponding search conditions:
@@ -1859,7 +1881,7 @@ SELECT * FROM (
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |A   |B   |
 |----|----|
@@ -1887,7 +1909,7 @@ SELECT * FROM (
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |A   |B   |
 |----|----|
@@ -1916,7 +1938,7 @@ WHERE emp.col2 BETWEEN 4000 AND 8000
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |EMP_ID|SALARY|
 |------|------|
@@ -1946,7 +1968,7 @@ WHERE emp.col2 NOT BETWEEN 4000 AND 8000
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |EMP_ID|SALARY|
 |------|------|
@@ -1977,7 +1999,7 @@ WHERE emp.col2 IN ('D01','D02')
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |EMP_ID|EMP_DEPT|
 |------|--------|
@@ -2015,7 +2037,7 @@ WHERE (emp.col1,emp.col2) IN (
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |EMP_ID|EMP_DEPT|
 |------|--------|
@@ -2045,7 +2067,7 @@ WHERE emp.col2 LIKE 'C%'
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |EMP_ID|EMP_DEPT|
 |------|--------|
@@ -2069,11 +2091,11 @@ FROM VALUES
     (7, 'D01'),
     (8, 'C03'),
     (9,'D01') AS emp
-WHERE emp.col2 NOT LIKE 'C%'   
+WHERE emp.col2 NOT LIKE 'C%'
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |EMP_DEPT|
 |--------|
@@ -2096,7 +2118,7 @@ WHERE data.col2 RLIKE 'bc$'
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |COL1|COL2          |
 |----|--------------|
@@ -2121,7 +2143,7 @@ WHERE data.col2 RLIKE '(abc){3}'
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |COL1|COL2     |
 |----|---------|
@@ -2141,7 +2163,7 @@ WHERE data.col2 RLIKE '\\d{3}[ \\t]\\d{3}[ \\t]\\d{3}'
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |COL1|COL2       |
 |----|-----------|
@@ -2170,7 +2192,7 @@ WHERE emp.col2 IS NULL
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |EMP_ID|SALARY|
 |------|------|
@@ -2227,13 +2249,13 @@ String values with appropriate formats can be converted to a timestamp or date, 
 SELECT
     CAST('2018-10-31 23:55:00' AS TIMESTAMP),
     CAST('2018-10-31 23:55:00' AS DATE),
-    CAST('HELLO' AS TIMESTAMP)  
+    CAST('HELLO' AS TIMESTAMP)
 FROM VALUES ('dummy')
 ```
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |CAST(2018-10-31 23:55:00 AS TIMESTAMP)|CAST(2018-2-28 23:55:00 AS DATE)|CAST(HELLO AS TIMESTAMP)|
 |--------------------------------------|--------------------------------|------------------------|
@@ -2269,8 +2291,8 @@ A `BINARY` type represents an array of byte values. Thus, string values can be c
 For further details about the clauses used by a *cast expression*, refer to the following topics:
 * [expression](#expression)
 * [identifier](#identifier),
-* [INTEGER_VALUE](#INTEGER_VALUE)
 * [STRING](#STRING)
+* [unsignedInteger](#unsignedInteger)
 
 <h4>Related References</h4>
 
@@ -2317,7 +2339,7 @@ FROM VALUES (0, 'A'), (1, 'B'), (2, 'C'), (3, 'D'), (4, 'E') AS dep
 ```
 {: codeblock}
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |DEP_ID|DEP_NAME      |
 |------|--------------|
@@ -2343,7 +2365,7 @@ FROM VALUES (0, 'A'), (1, 'B'), (2, 'C'), (3, 'D'), (4, 'E') AS dep
 {: codeblock}
 
 
-The result of the example query is shown in the table below.    
+The result of the example query is shown in the table below.
 
 |DEP_ID|DEP_NAME      |
 |------|--------------|
@@ -2492,11 +2514,11 @@ SELECT * FROM cos://us-geo/sql/employees.parquet STORED AS PARQUET TABLESAMPLE (
 <h3>More Topics</h3>
 
 For further details about the clauses used in a *table sample clause*, refer to the following topics:
- * [DECIMAL_VALUE](#DECIMAL_VALUE)
  * [expression](#expression)
  * [identifier](#identifier)
- * [INTEGER_VALUE](#INTEGER_VALUE)
  * [qualifiedName](#qualifiedName)
+ * [unsignedInteger](#unsignedInteger)
+ * [unsignedNumber](#unsignedNumber)
 
 <h3>Related References</h3>
 
@@ -2511,6 +2533,19 @@ A *table sample clause* is referenced by the following clause:
 A Cloud {{site.data.keyword.cos_short}} Uniform Resource Identifier (COS URI) is a string of characters that uniquely identifies an object on Cloud {{site.data.keyword.cos_short}}. By definition URIs are case-insensitive.
 
 The syntax of a COS URI is thoroughly described in section [Table unique resource identifier](/docs/services/sql-query?topic=sql-query-overview#table-unique-resource-identifier).
+
+<h3 id ="CRN_TABLE">CRN_TABLE</h3>
+
+A database table CRN is a unique identifier consisting of the CRN of a database service instance and a specific table name that instance.
+The user must have access to this service instance and its credentials.
+
+The syntax of a table CRN is thoroughly described in section [Table unique resource identifier](/docs/services/sql-query?topic=sql-query-overview#table-unique-resource-identifier).
+
+<h3 id ="DB2_TABLE_URI">DB2_TABLE_URI</h3>
+
+A Db2 table URI is a string of characters that uniquely identifies a table in a {{site.data.keyword.Db2_on_Cloud_long_notm}} instance. The instance must be enabled for IAM and the IBMid of the user must have been added as a database user.
+
+The syntax of a Db2 Table URI is thoroughly described in section [Table unique resource identifier](/docs/services/sql-query?topic=sql-query-overview#table-unique-resource-identifier).
 
 <h3 id="identifier">Identifier</h3>
 
@@ -2532,24 +2567,32 @@ contain any character including the grave accent character that has to be escape
 
 A number is either a signed or unsigned *integer* or a *decimal* number.
 
-<h4 id="INTEGER_VALUE">Integer Value</h4>
+<h3 id="unsignedNumber">Unsigned Number</h3>
+
+An unsigned number is an *integer* or *decimal* number without sign or type suffix.
+
+<h3 id="unsignedInteger">Unsigned Integer Number</h3>
+
+An unsigned integer is an *integer* number without sign or type suffix.
+
+<h4 id="INTEGER_VALUE">Integer Number</h4>
 
 An integer number is represented by a sequence of at least one digit, that is, `0` to `9`.
-The integer number can have a trailing identifier denoting the type of integer number. There are three types of integer numbers:
+The integer number can have a suffix denoting the type of integer number. There are three types of integer numbers:
 * `Y`: tiny integer number
 * `S`: small integer number
 * `L`: big integer number
 
 See section [dataType](#dataType) for more details about data types.
 
-<h4 id="DECIMAL_VALUE">Decimal Value</h4>
+<h4 id="DECIMAL_VALUE">Decimal Number</h4>
 
 A decimal number is the following:
 * A sequence of at least one digit followed by a positive or negative exponent, for example, `10E2` represents integer `1000` and `1E-1` represents 0.1.
 * A decimal number, for example, `3.14`.
 * A decimal number followed by a positive or negative exponent , for example, `3.14E+3` represents `3140.00` or `3.14E-3` represents `0.00314`.
 
-The decimal number can have a trailing identifier denoting the type of decimal number. There are two types of decimal numbers:
+The decimal number can have a suffix denoting the type of decimal number. There are two types of decimal numbers:
 * `D`: double decimal number
 * `BD`: big decimal number
 

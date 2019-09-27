@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-07-08"
+lastupdated: "2019-07-17"
 
 keywords: SQL query, time series, SQL, cleaning, resampling, examples, common functions, converting, timeticks, segmentation, TRS
 
@@ -38,10 +38,10 @@ Consider the following table, which is stored in a Parquet object with the name 
 
 The following SQL statement creates a new table with the name ts_table:
 
-```
+```sql
 SELECT TIME_SERIES_S(timetick, value) as ts   
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET   
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
 
@@ -63,10 +63,10 @@ Consider the following input StringTimeSeries, which is stored in a table column
 
 The following SELECT statement combines the observations that have identical time-stamps into a single observation whose value is the original values separated by an underscore (_) character:
 
-```
+```sql
 SELECT TS_COMBINE_DUPLICATE_TIMETICKS(ts1a, TS_COMBINER_CONCATENATE("_"))    
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET    
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
 
@@ -80,10 +80,10 @@ Consider the following input DoubleTimeSeries, which is stored in a table column
 
 The following SELECT statement combines the observations that have identical time-stamps into a single observation whose value is the average of the original values.  
 
-```
+```sql
 SELECT TS_COMBINE_DUPLICATE_TIMETICKS(ts1b, TS_COMBINER_AVERAGE())    
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET    
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
  
@@ -100,10 +100,10 @@ Segmentation functions create, as output, a segmented version of a time series. 
 
 The following SELECT statement uses column ts2 and a window size of 2 and a step size of 1 to generate a new DoubleSegmentTimeSeries:  
 
-```
+```sql
 SELECT TS_SEGMENT(ts2, 2, 1)     
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET    
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
 
@@ -114,10 +114,10 @@ The result of the example query is shown below:
 Some statistical functions operate expressly on segmented data. 
 For example, the following SELECT statement returns a DoubleTimeSeries that contains, for each segment of a DoubleSegmentTimeSeries, the average of its values.  
 
-```
+```sql
 SELECT TS_SEG_AVG(TS_SEGMENT(ts2, 2, 1))    
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET    
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
  
@@ -134,10 +134,10 @@ If necessary, use a [TRS](/docs/services/sql-query?topic=sql-query-TRS) to speci
 
 The following SELECT statement uses column ts3 and a TRS to generate a new DoubleTimeSeries that has a time granularity of 1 day and a start time of 00:00 on 01 January 1990.  
 
-```
+```sql
 SELECT TS_WITH_TRS(ts3, TS_TRS('PT24H', '1990-01-01T00:00:00'))    
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET    
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
 
@@ -154,10 +154,10 @@ Consider the following time series, which is stored in a table column with the n
 
 You can use the TS_FILLNA function to replace the null values in this time series, for example:  
 
-```
+```sql
 SELECT TS_FILLNA(ts5, TS_INTERPOLATOR_PREV(-1.0))    
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET    
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
 
@@ -177,10 +177,10 @@ Consider the following time series, which is stored in a table column with the n
 
 Running the TS_RESAMPLE function with an interpolater of type TS_INTERPOLATOR_PREV, periodicity 1, and fill value -1.0, produces the following output:  
 
-```
+```sql
 SELECT TS_RESAMPLE(ts6, 1, TS_INTERPOLATOR_PREV(-1.0))    
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET    
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
 
@@ -192,10 +192,10 @@ For each of the generated observations, the value is set to the value of the pre
 
 Changing the periodicity to 2 produces the following output:  
 
-```
+```sql
 SELECT TS_RESAMPLE(ts6, 2, TS_INTERPOLATOR_PREV(-1.0))    
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET    
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
 
@@ -209,10 +209,10 @@ The timestamp of the first generated observation is calculated by the formula TR
 
 Changing the periodicity to 3 produces the following output:  
 
-```
+```sql
 SELECT TS_RESAMPLE(ts6, 3, TS_INTERPOLATOR_PREV(-1.0))    
 FROM cos://us/sql/timeseries.parquet STORED AS PARQUET    
-INTO <replace with your target location> STORED AS PARQUET
+INTO <your target location> STORED AS PARQUET
 ```
 {: codeblock}
 

@@ -2,7 +2,11 @@
 
 copyright:
   year: 2018, 2019
-lastupdated: "2019-02-18"
+lastupdated: "2019-04-04"
+
+keywords: aspera, data lake, object storage, csv
+
+subcollection: sql-query
 
 ---
 

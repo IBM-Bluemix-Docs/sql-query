@@ -1,0 +1,208 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="railroad-diagram" width="1153" height="192" viewBox="0 0 1153 192">
+<defs><style type="text/css"><![CDATA[ svg.railroad-diagram {
+  background-color: #ffffff;
+}
+svg.railroad-diagram path {
+  stroke-width: 2;
+  stroke: #5a6872;
+  fill: none;
+}
+svg.railroad-diagram text {
+  font-size: 14px;
+  font-family: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  color: #152935;
+  text-anchor: middle;
+  cursor: pointer;
+}
+svg.railroad-diagram text.label {
+  text-anchor: start;
+}
+svg.railroad-diagram text.comment {
+  font-size: 12px;
+}
+svg.railroad-diagram rect {
+  stroke-width: 2;
+  stroke:  #5a6872;
+  fill: #5aaafa;
+}
+ ]]></style></defs>
+<g transform="translate(.5 .5)">
+<path d="M 20 31 v 20 m 10 -20 v 20 m -10 -10 h 20.5"></path>
+<g>
+<path d="M40 41h0"></path>
+<path d="M1112 41h0"></path>
+<path d="M40 41h10"></path>
+<g>
+<path d="M50 41h0"></path>
+<path d="M118 41h0"></path>
+<rect x="50" y="30" width="68" height="22"></rect>
+<text x="84" y="45">COSURI</text>
+</g>
+<path d="M118 41h10"></path>
+<g>
+<path d="M128 41h0"></path>
+<path d="M380 41h0"></path>
+<path d="M128 41a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10"></path>
+<g>
+<path d="M148 21h212"></path>
+</g>
+<path d="M360 21a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10"></path>
+<path d="M128 41h20"></path>
+<g>
+<path d="M148 41h0"></path>
+<path d="M360 41h0"></path>
+<path d="M148 41h10"></path>
+<g>
+<path d="M158 41h0"></path>
+<path d="M250 41h0"></path>
+<rect x="158" y="30" width="92" height="22" rx="10" ry="10"></rect>
+<text x="204" y="45">JOBPREFIX</text>
+</g>
+<path d="M250 41h10"></path>
+<g>
+<path d="M260 41h0"></path>
+<path d="M360 41h0"></path>
+<path d="M260 41h20"></path>
+<g>
+<path d="M280 41h0"></path>
+<path d="M340 41h0"></path>
+<rect x="280" y="30" width="60" height="22" rx="10" ry="10"></rect>
+<text x="310" y="45">JOBID</text>
+</g>
+<path d="M340 41h20"></path>
+<path d="M260 41a10 10 0 0 1 10 10v10a10 10 0 0 0 10 10"></path>
+<g>
+<path d="M280 71h4"></path>
+<path d="M336 71h4"></path>
+<rect x="284" y="60" width="52" height="22" rx="10" ry="10"></rect>
+<text x="310" y="75">NONE</text>
+</g>
+<path d="M340 71a10 10 0 0 0 10 -10v-10a10 10 0 0 1 10 -10"></path>
+</g>
+</g>
+<path d="M360 41h20"></path>
+</g>
+<path d="M380 41h10"></path>
+<g>
+<path d="M390 41h0"></path>
+<path d="M466 41h0"></path>
+<rect x="390" y="30" width="76" height="22" rx="10" ry="10"></rect>
+<text x="428" y="45">@break@</text>
+</g>
+<path d="M466 41h10"></path>
+<g>
+<path d="M476 41h0"></path>
+<path d="M776 41h0"></path>
+<path d="M476 41a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10"></path>
+<g>
+<path d="M496 21h260"></path>
+</g>
+<path d="M756 21a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10"></path>
+<path d="M476 41h20"></path>
+<g>
+<path d="M496 41h0"></path>
+<path d="M756 41h0"></path>
+<path d="M496 41h10"></path>
+<g>
+<path d="M506 41h0"></path>
+<path d="M574 41h0"></path>
+<rect x="506" y="30" width="68" height="22" rx="10" ry="10"></rect>
+<text x="540" y="45">STORED</text>
+</g>
+<path d="M574 41h10"></path>
+<path d="M584 41h10"></path>
+<g>
+<path d="M594 41h0"></path>
+<path d="M630 41h0"></path>
+<rect x="594" y="30" width="36" height="22" rx="10" ry="10"></rect>
+<text x="612" y="45">AS</text>
+</g>
+<path d="M630 41h10"></path>
+<g>
+<path d="M640 41h0"></path>
+<path d="M756 41h0"></path>
+<path d="M640 41h20"></path>
+<g>
+<path d="M660 41h12"></path>
+<path d="M724 41h12"></path>
+<rect x="672" y="30" width="52" height="22" rx="10" ry="10"></rect>
+<text x="698" y="45">AVRO</text>
+</g>
+<path d="M736 41h20"></path>
+<path d="M640 41a10 10 0 0 1 10 10v10a10 10 0 0 0 10 10"></path>
+<g>
+<path d="M660 71h16"></path>
+<path d="M720 71h16"></path>
+<rect x="676" y="60" width="44" height="22" rx="10" ry="10"></rect>
+<text x="698" y="75">CSV</text>
+</g>
+<path d="M736 71a10 10 0 0 0 10 -10v-10a10 10 0 0 1 10 -10"></path>
+<path d="M640 41a10 10 0 0 1 10 10v40a10 10 0 0 0 10 10"></path>
+<g>
+<path d="M660 101h12"></path>
+<path d="M724 101h12"></path>
+<rect x="672" y="90" width="52" height="22" rx="10" ry="10"></rect>
+<text x="698" y="105">JSON</text>
+</g>
+<path d="M736 101a10 10 0 0 0 10 -10v-40a10 10 0 0 1 10 -10"></path>
+<path d="M640 41a10 10 0 0 1 10 10v70a10 10 0 0 0 10 10"></path>
+<g>
+<path d="M660 131h16"></path>
+<path d="M720 131h16"></path>
+<rect x="676" y="120" width="44" height="22" rx="10" ry="10"></rect>
+<text x="698" y="135">ORC</text>
+</g>
+<path d="M736 131a10 10 0 0 0 10 -10v-70a10 10 0 0 1 10 -10"></path>
+<path d="M640 41a10 10 0 0 1 10 10v100a10 10 0 0 0 10 10"></path>
+<g>
+<path d="M660 161h0"></path>
+<path d="M736 161h0"></path>
+<rect x="660" y="150" width="76" height="22" rx="10" ry="10"></rect>
+<text x="698" y="165">PARQUET</text>
+</g>
+<path d="M736 161a10 10 0 0 0 10 -10v-100a10 10 0 0 1 10 -10"></path>
+</g>
+</g>
+<path d="M756 41h20"></path>
+</g>
+<g>
+<path d="M776 41h0"></path>
+<path d="M972 41h0"></path>
+<path d="M776 41a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10"></path>
+<g>
+<path d="M796 21h156"></path>
+</g>
+<path d="M952 21a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10"></path>
+<path d="M776 41h20"></path>
+<g>
+<path d="M796 41h0"></path>
+<path d="M952 41h0"></path>
+<rect x="796" y="30" width="156" height="22"></rect>
+<text x="874" y="45">partitionedClause</text>
+</g>
+<path d="M952 41h20"></path>
+</g>
+<g>
+<path d="M972 41h0"></path>
+<path d="M1112 41h0"></path>
+<path d="M972 41a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10"></path>
+<g>
+<path d="M992 21h100"></path>
+</g>
+<path d="M1092 21a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10"></path>
+<path d="M972 41h20"></path>
+<g>
+<path d="M992 41h0"></path>
+<path d="M1092 41h0"></path>
+<rect x="992" y="30" width="100" height="22"></rect>
+<text x="1042" y="45">sortClause</text>
+</g>
+<path d="M1092 41h20"></path>
+</g>
+</g>
+<path d="M 1112 41 h 20 m -10 -10 v 20 m 10 -20 v 20"></path>
+</g>
+</svg>

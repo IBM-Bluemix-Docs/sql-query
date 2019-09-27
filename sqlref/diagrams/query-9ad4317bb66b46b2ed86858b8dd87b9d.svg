@@ -1,0 +1,158 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="railroad-diagram"  width="517" height="207" viewBox="0 0 517 207" >
+<defs><style type="text/css"><![CDATA[ svg.railroad-diagram {
+  background-color: #ffffff;
+}
+svg.railroad-diagram path {
+  stroke-width: 2;
+  stroke: #5a6872;
+  fill: none;
+}
+svg.railroad-diagram text {
+  font-size: 14px;
+  font-family: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  color: #152935;
+  text-anchor: middle;
+  cursor: pointer;
+}
+svg.railroad-diagram text.label {
+  text-anchor: start;
+}
+svg.railroad-diagram text.comment {
+  font-size: 12px;
+}
+svg.railroad-diagram rect {
+  stroke-width: 2;
+  stroke:  #5a6872;
+  fill: #5aaafa;
+}
+ ]]></style></defs>
+
+<g transform="translate(.5 .5)">
+<path d="M20 31  v 20 m 10 -20 v 20 m -10 -10 h 20.5"></path>
+<g>
+<path d="M40 41 h0"></path>
+<path d="M820 41 h0"></path>
+<g>
+<path d="M40 41 h0"></path>
+<path d="M312 41 h0"></path>
+<path d="M40 41 a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10"></path>
+<g>
+<path d="M60 21 h232"></path>
+</g>
+<path d="M292 21 a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10"></path>
+<path d="M40 41 h20"></path>
+<g>
+<path d="M60 41 h0"></path>
+<path d="M292 41 h0"></path>
+<path d="M60 41 h10"></path>
+<g>
+<path d="M70 41 h0"></path>
+<path d="M122 41 h0"></path>
+<rect x="70" y="30" width="52" height="22"  rx="10" ry="10"></rect>
+<text x="96" y="45">WITH</text>
+</g>
+<path d="M122 41 h10"></path>
+<path d="M132 41 h10"></path>
+<g>
+<path d="M142 41 h0"></path>
+<path d="M282 41 h0"></path>
+<path d="M142 41 h10"></path>
+<g>
+<path d="M152 41 h0"></path>
+<path d="M272 41 h0"></path>
+<path d="M152 41 h10"></path>
+<g>
+<path d="M162 41 h0"></path>
+<path d="M262 41 h0"></path>
+<rect x="162" y="30" width="100" height="22" ></rect>
+<text x="212" y="45">namedQuery</text>
+</g>
+<path d="M262 41 h10"></path>
+</g>
+<path d="M272 41 h10"></path>
+<path d="M152 41 a10 10 0 0 0 -10 10v10a10 10 0 0 0 10 10"></path>
+<g>
+<path d="M152 71 h36"></path>
+<path d="M236 71 h36"></path>
+<path d="M188 71 h10"></path>
+<g>
+<path d="M198 71 h0"></path>
+<path d="M226 71 h0"></path>
+<rect x="198" y="60" width="28" height="22"  rx="10" ry="10"></rect>
+<text x="212" y="75">,</text>
+</g>
+<path d="M226 71 h10"></path>
+</g>
+<path d="M272 71 a10 10 0 0 0 10 -10v-10a10 10 0 0 0 -10 -10"></path>
+</g>
+<path d="M282 41 h10"></path>
+</g>
+<path d="M292 41 h20"></path>
+</g>
+<path d="M312 41 h10"></path>
+<g>
+<path d="M322 41 h0"></path>
+<path d="M422 41 h0"></path>
+<rect x="322" y="30" width="100" height="22" ></rect>
+<text x="372" y="45">fullselect</text>
+</g>
+<path d="M422 41 h10"></path>
+<path d="M432 41 h10"></path>
+<g id="eol">
+<path d="M442 41 h0"></path>
+<path d="M442 41 a 10 10 0 0 1 10 10 V 90 a 10 10 0 0 1 -10 10 h -411 a 10 10 0 0 0 -10 10 V 135 a 10 10 0 0 0 10 10"></path>
+<path d="M442 41 h0"></path>
+<path d="M442 41 h0"></path>
+</g>
+<path d="M31 145 h10"></path>
+<g>
+<path d="M41 145 h0"></path>
+<path d="M333 145 h0"></path>
+<path d="M41 145 a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10"></path>
+<g>
+<path d="M61 125 h252"></path>
+</g>
+<path d="M313 125 a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10"></path>
+<path d="M41 145 h20"></path>
+<g>
+<path d="M61 145 h0"></path>
+<path d="M313 145 h0"></path>
+<path d="M61 145 h10"></path>
+<g>
+<path d="M71 145 h0"></path>
+<path d="M123 145 h0"></path>
+<rect x="71" y="134" width="52" height="22"  rx="10" ry="10"></rect>
+<text x="97" y="149">INTO</text>
+</g>
+<path d="M123 145 h10"></path>
+<g>
+<path d="M133 145 h0"></path>
+<path d="M313 145 h0"></path>
+<path d="M133 145 h20"></path>
+<g>
+<path d="M153 145 h0"></path>
+<path d="M293 145 h0"></path>
+<rect x="153" y="134" width="140" height="22" ></rect>
+<text x="223" y="149">cosResultClause</text>
+</g>
+<path d="M293 145 h20"></path>
+<path d="M133 145 a10 10 0 0 1 10 10v10a10 10 0 0 0 10 10"></path>
+<g>
+<path d="M153 175 h4"></path>
+<path d="M289 175 h4"></path>
+<rect x="157" y="164" width="132" height="22" ></rect>
+<text x="223" y="179">dbResultClause</text>
+</g>
+<path d="M293 175 a10 10 0 0 0 10 -10v-10a10 10 0 0 1 10 -10"></path>
+</g>
+</g>
+<path d="M313 145 h20"></path>
+</g>
+</g>
+<path d="M333 145  h 20 m -10 -10 v 20 m 10 -20 v 20"></path>
+</g>
+</svg>

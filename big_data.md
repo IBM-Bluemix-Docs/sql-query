@@ -2,7 +2,11 @@
 
 copyright:
   year: 2018, 2019
-lastupdated: "2019-02-18"
+lastupdated: "2019-04-04"
+
+keywords: data model, data, performance, cost, object storage
+
+subcollection: sql-query
 
 ---
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="railroad-diagram" width="621" height="162" viewBox="0 0 621 162">
+
 <defs><style type="text/css"><![CDATA[ svg.railroad-diagram {
   background-color: #ffffff;
 }
@@ -29,6 +31,7 @@ svg.railroad-diagram rect {
   fill: #5aaafa;
 }
  ]]></style></defs>
+
 <g transform="translate(.5 .5)">
 <path d="M 20 31 v 20 m 10 -20 v 20 m -10 -10 h 20.5"></path>
 <g>

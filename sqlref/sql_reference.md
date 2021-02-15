@@ -3505,7 +3505,7 @@ ALTER TABLE customers_partitioned RECOVER PARTITIONS
 
 In order to add or remove partitions individually, use the `ADD PARTITION` or `DROP PARTITION` options.
 
-The `ADD PARTITON` option allows you to specify an explicit location for the new partition. This way, you can construct a table from object locations that do not share a common {{site.data.keyword.cos_short}} prefix, or are even located in separate buckets. If the partiton location is not specified, it is inferred from the location of the table and the value(s) of the partitioning column(s). `ADD PARTITION` does not validate the specified or inferred location.
+The `ADD PARTITION` option allows you to specify an explicit location for the new partition. This way, you can construct a table from object locations that do not share a common {{site.data.keyword.cos_short}} prefix, or are even located in separate buckets. If the partition location is not specified, it is inferred from the location of the table and the value(s) of the partitioning column(s). `ADD PARTITION` does not validate the specified or inferred location.
 
 
 ```sql

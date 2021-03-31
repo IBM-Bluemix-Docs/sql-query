@@ -22,10 +22,10 @@ subcollection: sql-query
 # Activity Tracker events
 {: #activitytracker}
 
-Use the {{site.data.keyword.cloudaccesstraillong}} service to track how users and applications interact with {{site.data.keyword.sqlquery_full}}.
+Use the {{site.data.keyword.at_full}} service to track how users and applications interact with {{site.data.keyword.sqlquery_full}}.
 
-The {{site.data.keyword.cloudaccesstraillong_notm}} service records user-initiated activities that change the state of a service in {{site.data.keyword.cloud}}.
-For more information, see [Getting started with Activity Tracker with LogDNA](/docs/Activity-Tracker-with-LogDNA?topic=Activity-Tracker-with-LogDNA-getting-started).
+The {{site.data.keyword.at_full_notm}} service records user-initiated activities that change the state of a service in {{site.data.keyword.cloud}}.
+For more information, see [Getting started with {{site.data.keyword.at_short}}](/docs/Activity-Tracker-with-LogDNA?topic=Activity-Tracker-with-LogDNA-getting-started).
 
 ##List of events
 {: #events}

@@ -221,7 +221,7 @@ If you cannot or do not want to use the default mechanism of IAM user authentica
 
 The Db2 table URI has the following form:
 
-**`db2://<db2 host name>[<db2 port number>]/<table name>`**
+**`db2://<db2 host name>[:<db2 port number>]/<table name>`**
 
 The **`<db2 host name>`** is the hostname of the Db2 instance that is used to access the Db2 web console and is also used for Java database connectivity (JDBC).
 

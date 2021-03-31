@@ -221,9 +221,11 @@ If you cannot or do not want to use the default mechanism of IAM user authentica
 
 The Db2 table URI has the following form:
 
-**`db2://<db2 host name>/<table name>`**
+**`db2://<db2 host name>[<db2 port number>]/<table name>`**
 
 The **`<db2 host name>`** is the hostname of the Db2 instance that is used to access the Db2 web console and is also used for Java database connectivity (JDBC).
+
+The **`<db2 port number>`** is optional. It is the port number of the DRDA endpoint of the Db2 instance which is used by DB2 client JDBC drivers. The default value is **`50001`**. For **Db2 Warehouse on Cloud** instances it is always this port number and you can imit it. For **Db2 on Cloud** instances the port number can vary and you need to check the instance configuration to get the correct port number to specify here.
 
 The **`<table name>`** part specifies the table that is created in your database. It has the format **`<schemaname>.<tablename>`**.
 If you omit the **`<schemaname>`** part, the table is created in the schema of database user that was created for the IBMid of the SQL user. The table name is case-preserving, so use upper case to match database defaults.

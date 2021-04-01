@@ -2,9 +2,9 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-02-25"
+lastupdated: "2021-03-31"
 
-keywords: aspera, data lake, object storage, csv, sysdig, monitoring
+keywords: aspera, data lake, object storage, csv, monitoring
 
 subcollection: sql-query
 
@@ -19,17 +19,17 @@ subcollection: sql-query
 {:deprecated: .deprecated}
 {:important: .important}
 
-# Monitoring with Sysdig
+# Monitoring
 {: #metrics}
 
-[{{site.data.keyword.mon_full}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started) is a third-party cloud-native, and container-intelligence management system that you can include as part of your {{site.data.keyword.cloud_notm}} architecture. Use it to gain operational visibility into the performance and health of your applications, services, and platforms. It offers administrators, DevOps teams, and developers full stack telemetry with advanced features to monitor and troubleshoot, define alerts, and design custom dashboards.
+{{site.data.keyword.mon_full}} is a cloud-native, and container-intelligence management system that you can include as part of your {{site.data.keyword.cloud_notm}} architecture. Use it to gain operational visibility into the performance and health of your applications, services, and platforms. It offers administrators, DevOps teams, and developers full stack telemetry with advanced features to monitor and troubleshoot, define alerts, and design custom dashboards.
 {:shortdesc}
 
 
 ## Opting in to and enabling {{site.data.keyword.sqlquery_full}} metrics
 {: #opt_in_metrics}
 
-Before you can start to use {{site.data.keyword.sqlquery_short}} Sysdig metrics, you must first opt in and then enable platform metrics by completing the following steps:
+Before you can start to use {{site.data.keyword.sqlquery_short}} metrics, you must first opt in and then enable platform metrics by completing the following steps:
 
 1. Enable platform metrics for {{site.data.keyword.sqlquery_short}}. For more information, see [Enabling platform metrics ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-platform_metrics_enabling){:new_window}. The owner of the account has full access to the metrics data. For more information about managing access for other users, see [Getting started tutorial for {{site.data.keyword.mon_full}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started){:new_window}.
 
@@ -143,4 +143,4 @@ The following attributes are available for segmenting one or more attributes as 
 
 ## Next Steps
 
-You can manage the data that the Monitoring with Sysdig instance collects for you. From management to setting alerts, you can [get started ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started) monitoring your data quickly and efficiently.
+You can manage the data that the Monitoring instance collects for you. From management to setting alerts, you can [get started ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started) monitoring your data quickly and efficiently.

@@ -33,8 +33,8 @@ Use the {{site.data.keyword.sqlquery_short}} user interface (UI) to develop your
 
 <br>
 
-<iframe width="640" height="390" title="IBM Cloud SQL Query: Provision the IBM Cloud Services"  
-src="https://www.youtube.com/embed/_fMEyqRC__c?list=PLzpeuWUENMK2R9CqhF0eJDSxfPBi6JeXA" 
+<iframe width="640" height="390" title="IBM Cloud SQL Query: Provision the IBM Cloud Services"
+src="https://www.youtube.com/embed/_fMEyqRC__c?list=PLzpeuWUENMK2R9CqhF0eJDSxfPBi6JeXA"
 frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
 
 *Video 1. Provision the IBM Cloud Services.*
@@ -187,7 +187,7 @@ Matching columns must have compatible data types across all objects where they a
 
 Two ways to specify database locations exist, CRN URIs, and Db2 table URIs. Which one you choose
 depends on the target database plan and the access you have to that database.
-The number of parallel Db2 connections affects performance. The more parallel connections there are, the better the performance gets, depending on the allowed connections to Db2 and the current free resources of {{site.data.keyword.sqlquery_short}}. Check how many connections your [Db2 plan](https://cloud.ibm.com/catalog/services/db2) allows. 
+The number of parallel Db2 connections affects performance. The more parallel connections there are, the better the performance gets, depending on the allowed connections to Db2 and the current free resources of {{site.data.keyword.sqlquery_short}}. Check how many connections your [Db2 plan](https://cloud.ibm.com/catalog/services/db2) allows.
 
 #### CRN URI location
 {: #crn-uri}
@@ -225,7 +225,7 @@ The Db2 table URI has the following form:
 
 The **`<db2 host name>`** is the hostname of the Db2 instance that is used to access the Db2 web console and is also used for Java database connectivity (JDBC).
 
-The **`<db2 port number>`** is optional. It is the port number of the DRDA endpoint of the Db2 instance which is used by DB2 client JDBC drivers. The default value is **`50001`**. For **Db2 Warehouse on Cloud** instances it is always this port number and you can imit it. For **Db2 on Cloud** instances the port number can vary and you need to check the instance configuration to get the correct port number to specify here.
+The **`<db2 port number>`** is optional. It is the port number of the DRDA endpoint of the Db2 instance which is used by client JDBC drivers. The default value is **`50001`**. For **Db2 Warehouse on Cloud** instances, this port number is fixed and you can omit it. For **Db2 on Cloud** instances, the port number can vary. Check the instance configuration to get the correct port number.
 
 The **`<table name>`** part specifies the table that is created in your database. It has the format **`<schemaname>.<tablename>`**.
 If you omit the **`<schemaname>`** part, the table is created in the schema of database user that was created for the IBMid of the SQL user. The table name is case-preserving, so use upper case to match database defaults.
@@ -253,11 +253,11 @@ If you want to run a query over the combined results of multiple previous querie
 ## Endpoints
 {: #endpoints}
 
-Your Cloud {{site.data.keyword.cos_short}} instance has one of the supported endpoints. {{site.data.keyword.sqlquery_short}} supports all [public and private {{site.data.keyword.cos_short}} endpoints](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-endpoints). To save space, you can use the alias that is shown instead of the full endpoint name. 
+Your Cloud {{site.data.keyword.cos_short}} instance has one of the supported endpoints. {{site.data.keyword.sqlquery_short}} supports all [public and private {{site.data.keyword.cos_short}} endpoints](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-endpoints). To save space, you can use the alias that is shown instead of the full endpoint name.
 
 Aliases to tethering endpoints (specific endpoints within cross region domains, for example, `dal-us-geo`) are considered legacy. They continue to work until further notice but are planned to be deprecated sometime in the future. To be prepared, update your applications to use the alias of the corresponding cross region endpoint (for example, `us-geo`).
 
-**Note:** {{site.data.keyword.sqlquery_short}} always uses the internal endpoint to interact with {{site.data.keyword.cos_short}}, 
+**Note:** {{site.data.keyword.sqlquery_short}} always uses the internal endpoint to interact with {{site.data.keyword.cos_short}},
 even if an external endpoint was specified in the query. The result location for a query always indicates the external endpoint name.
 When you interact with {{site.data.keyword.sqlquery_short}} programmatically through the API, you can use the internal endpoint name to read results instead of the external endpoint name that is returned by the API.
 
@@ -367,8 +367,8 @@ Each successful query is charged with at least 10 MB.
 ### Example
 {: #data-scanned-example}
 
-Assume you have 1 PB of data that is stored on Cloud {{site.data.keyword.cos_short}} that is laid out as described in the 
-[blog post](https://www.ibm.com/cloud/blog/big-data-layout) and is optimized for the queries you want to run. 
+Assume you have 1 PB of data that is stored on Cloud {{site.data.keyword.cos_short}} that is laid out as described in the
+[blog post](https://www.ibm.com/cloud/blog/big-data-layout) and is optimized for the queries you want to run.
 If you run a single query, the most expensive query possible is `SELECT * FROM`, as reading 1 PB of data is required. Any other query is much cheaper and faster. For example, a 1 PB data set consists of audit events for users of a system (user A performed action B in system X at time T) and the data is laid out in a way that it is partitioned by time (one file per day and system). So to answer a query like `SELECT DISTINCT user FROM WHERE System='X' AND Day >= (TODAY - 30)`, {{site.data.keyword.sqlquery_short}} must access all objects for system X that contain data for the last 30 days. The sum of the size of these objects is the maximum estimate of data that is scanned that you would be charged for. But as {{site.data.keyword.sqlquery_short}} accesses only one field, and data is stored as Parquet, it is much less. Calculating the precise price of the query is not possible in advance because much of it depends on the data itself. Parquet, for example, stores compressed columns, so if the column can be compressed effectively, even less data needs to be read. You also find some further details in the blog post [SQL Query releases serverless transformation and partitioning of data in open formats](https://www.ibm.com/cloud/blog/announcements/sql-query-releases-serverless-transformation-and-partitioning-of-data-in-open-formats) about {{site.data.keyword.sqlquery_short}} ETL capabilities and how they affect scanned data.
 
 ## Timestamps

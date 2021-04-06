@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2021
-lastupdated: "2021-03-12"
+lastupdated: "2021-04-06"
 
 keywords: SQL query, analyze, data, CVS, JSON, ORC, Parquet, Avro, object storage, SELECT, cloud instance, URI, endpoint, api, user roles
 
@@ -225,7 +225,7 @@ The Db2 table URI has the following form:
 
 The **`<db2 host name>`** is the hostname of the Db2 instance that is used to access the Db2 web console and is also used for Java database connectivity (JDBC).
 
-The **`<db2 port number>`** is optional. It is the port number of the DRDA endpoint of the Db2 instance which is used by client JDBC drivers. The default value is **`50001`**. For **Db2 Warehouse on Cloud** instances, this port number is fixed and you can omit it. For **Db2 on Cloud** instances, the port number can vary. Check the instance configuration to get the correct port number.
+The **`<db2 port number>`** is optional. It is the port number of the DRDA endpoint of the Db2 instance that is used by client JDBC drivers. The default value is **`50001`**. For {{site.data.keyword.dashdblong}} instances, this port number is fixed and you can omit it. For {{site.data.keyword.Db2_on_Cloud_long}} instances, the port number can vary. Check the instance configuration to get the correct port number.
 
 The **`<table name>`** part specifies the table that is created in your database. It has the format **`<schemaname>.<tablename>`**.
 If you omit the **`<schemaname>`** part, the table is created in the schema of database user that was created for the IBMid of the SQL user. The table name is case-preserving, so use upper case to match database defaults.

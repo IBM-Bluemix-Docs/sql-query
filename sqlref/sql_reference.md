@@ -231,14 +231,14 @@ Partitioning the result object by the column `PARTITIONED BY (country)`, would c
 
 When the result object is stored this way on Cloud {{site.data.keyword.cos_short}}, each SQL query that contains a predicate,
 such as `country = 'USA'` or `country in ('MALTA', 'ITALY', 'VATICAN CITY')`, benefits from this physical layout. The reason is that during
-SQL query execution partitions must only be read if they contain data for the countries of interest must be read. This tremendously cuts down the I/O traffic of the SQL query.
+SQL query execution partitions must only be read if they contain data for the countries of interest. This tremendously cuts down the I/O traffic of the SQL query.
 
 Some additional remarks on Hive-style partitioning:
 
 - Hive-style partitions have an eye-catching naming scheme because the column names that are used for partitioning are part of the partition object prefix, for example, `/order/COUNTRY=USA/part-m-00000.snappy.parquet`.
 - Hive-style partitions do not contain any values for partition columns since their values are *stored* in the object prefix of the partition.
 Thus, if you copy a HIVE-style partition and rename the object prefix by removing the partition column values, you lose data.
-- Hive-style partitions have a tendency for data skewing. For example, the partition that represents order data from Malta is likely much smaller 
+- Hive-style partitions have a tendency for data skewing. For example, the partition that represents order data from Malta is likely much smaller
 than the partition that represents order data from the US. You can partition the query result into separate objects if you want to have *equally sized* partitions.
 
 
@@ -867,9 +867,9 @@ All single Unicode characters are allowed as delimiters.
 By default, it is assumed that CSV input objects have a header line that specifies the names of the input columns.  If the objects don't have a header line, you must specify the option `NOHEADER` in the `STORED AS CSV` clause. In this case, the names _C0, _C1, ... are used for the input columns.
 For more information, see [COS URI](#COSURI).
 
-By default, if the format of the input data is JSON, each line must contain a separate, self-contained, and valid JSON object, also called newline-delimited JSON. 
-However, if you specify the option `MULTILINE`, {{site.data.keyword.sqlquery_short}} can process JSON input data even if individual data records span multiple lines, 
-such as when the data was formatted to make it easier to read. Specify this option only if you really need it because it limits input parallelization and can 
+By default, if the format of the input data is JSON, each line must contain a separate, self-contained, and valid JSON object, also called newline-delimited JSON.
+However, if you specify the option `MULTILINE`, {{site.data.keyword.sqlquery_short}} can process JSON input data even if individual data records span multiple lines,
+such as when the data was formatted to make it easier to read. Specify this option only if you really need it because it limits input parallelization and can
 significantly reduce performance when you process large volumes of JSON data. If you need to frequently query large amounts of multiline JSON data, use {{site.data.keyword.sqlquery_short}} to transform the data into single -line JSON, or into a more performance optimized format, such as Parquet, before querying the transformed data.
 
 If the file format is Parquet, the optional `MERGE SCHEMA` clause allows you to handle Parquet schema evolution by specifying to scan all qualifying Parquet objects for their schema, and to merge the final schema across all objects. By default, for Parquet input only the first Parquet object found is used to infer the schema, which guarantees minimal overhead for compiling the SQL. Thus, use this option if your Parquet input data does not have a homogeneous schema.
@@ -916,19 +916,19 @@ The following examples show you how to use  TIME_SERIES_FORMAT parameters for dy
 Create a time series per location, set the time series TRS with default start time and 1 ms granularity, and store with it with the name "ts".
 
 ```
-SELECT 
-	location, 
+SELECT
+	location,
 	ts
 FROM cos://us-geo/sql/temperature_humidity.csv
 USING TIME_SERIES_FORMAT(key="location", timetick="timestamp", value="humidity", granularity="PT0.001S") in ts
 ```
 
-Create a time series per location, set the time series TRS with start time "2011-12-03T10:15:30" and default granularity (1 ms), and store it 
+Create a time series per location, set the time series TRS with start time "2011-12-03T10:15:30" and default granularity (1 ms), and store it
 with the name "ts".
 
 ```
-SELECT 
-	location, 
+SELECT
+	location,
 	ts
 FROM cos://us-geo/sql/temperature_humidity.csv
 USING TIME_SERIES_FORMAT(key="location", timetick="timestamp", value="humidity", starttime="2011-12-03T10:15:30") in ts
@@ -938,19 +938,19 @@ Create a time series per location with no TRS, store it with the name "ts".
 If no granularity or start time are provided, a TRS will not be associated with the time series and therefore with_trs will run into exception.
 
 ```
-SELECT 
-	location, 
+SELECT
+	location,
 	ts
 FROM cos://us-geo/sql/temperature_humidity.csv
 USING TIME_SERIES_FORMAT(key="location", timetick="timestamp", value="humidity") in ts
 ```
 
-Create a single time series, store it with the default name "time_series". 
+Create a single time series, store it with the default name "time_series".
 Without specifying a key, it is not possible to create multiple time series.
 
 ```
-SELECT 
-	location, 
+SELECT
+	location,
 	time_series
 FROM cos://us-geo/sql/temperature_humidity.csv
 USING TIME_SERIES_FORMAT(timetick="timestamp", value="humidity")
@@ -984,7 +984,7 @@ You can optionally also combine `FLATTEN` with `CLEANCOLS`.
 
 You can wrap your external table definition optionally with the `CLEANCOLS` table transformation function.
 It preprocesses your input table before query compilation by renaming all columns that have characters that are NOT supported by certain target formats, such as Parquet.
-These characters are `,`, `;`, `,,,`, `=`, `(`, `)`, `{`, and `}`. They are replaced by the corresponding URL-encoded representation, for example, %20 for space (` `). 
+These characters are `,`, `;`, `,,,`, `=`, `(`, `)`, `{`, and `}`. They are replaced by the corresponding URL-encoded representation, for example, %20 for space (` `).
 This allows you to write results, for example, into Parquet, without the need to provide column by column alias names in your SQL
 when your input data has columns with these characters. A typical situation is the existence of space (` `) in input columns.
 
@@ -1133,7 +1133,7 @@ The result of the example query is shown in the following table.
 ### Values Statement
 {: #chapterValuesStatement}
 
-A *values statement* is a statement on its own. It can be used instead of a *fullselect* if your statement 
+A *values statement* is a statement on its own. It can be used instead of a *fullselect* if your statement
 references only a single value and does not contain any join with other relations or values clauses.
 
 <h3>Examples</h3>
@@ -1576,7 +1576,7 @@ The *join types* are specified in a [relation](#relation).
 {: #chapterSamplingTableData}
 
 Any table that is object stored on Cloud {{site.data.keyword.cos_short}}, used in a *from clause*, can be associated with a *table sample clause*.
-The table sample clause defines how to retrieve a subset of rows from the underlying table (object stored on Cloud {{site.data.keyword.cos_short}}). 
+The table sample clause defines how to retrieve a subset of rows from the underlying table (object stored on Cloud {{site.data.keyword.cos_short}}).
 Thus, you can write queries for samples of the data, for example, for interactive data exploration and data mining.
 
 The general syntax of a table sample clause is described by the following syntax diagram.
@@ -1702,7 +1702,7 @@ A *function or aggregate clause* is referenced by the following clause:
 ### Window functions
 {: #chapterWindowFunctions}
 
-Classic SQL **aggregation functions** like `SUM()`, `MAX()`, or `MIN()` process a group of rows to derive a single value. **Window functions** take this one step further by allowing to process a group of rows and derive a single value for each row in the group. 
+Classic SQL **aggregation functions** like `SUM()`, `MAX()`, or `MIN()` process a group of rows to derive a single value. **Window functions** take this one step further by allowing to process a group of rows and derive a single value for each row in the group.
 Note the difference to **scalar functions** that return a single value for each row. Scalar functions derive a single value from a single row and not a group of rows.
 
 With window functions, it is possible to calculate things like *moving averages* or *cumulative sums*.
@@ -2834,7 +2834,7 @@ In general, the value of the case expression is the value of the *result express
 If no case evaluates to true and the ELSE keyword is present, the result is the value of the ELSE case result expression.
 If no case evaluates to true and the ELSE keyword is not present, the result is NULL. When a case evaluates to unknown (because of NULLs), the case is not true and hence is treated the same way as a case that evaluates to false.
 
-When you use the *simple when clause*, the value of the expression before the first WHEN keyword is tested for equality with the value of the expression that follows the WHEN keyword. 
+When you use the *simple when clause*, the value of the expression before the first WHEN keyword is tested for equality with the value of the expression that follows the WHEN keyword.
 Therefore, the data type of the expression before the first WHEN keyword must be comparable to the data types of each expression that follows the WHEN keywords.
 
 A *result expression* is an expression that follows the `THEN` or `ELSE` keywords.
@@ -3320,7 +3320,7 @@ A *dataType* is referenced by the following clauses:
 ## Catalog management
 {: #chapterHiveCatalog}
 
-The following commands allow users to store table metadata catalog in the {{site.data.keyword.sqlquery_short}} catalog. 
+The following commands allow users to store table metadata catalog in the {{site.data.keyword.sqlquery_short}} catalog.
 By defining the tables, columns, and partitions in the catalog, you can use short table names in the SQL SELECT statements. Each instance of {{site.data.keyword.sqlquery_short}} has its own catalog, and table definitions are not visible from other instances.
 For more information, see [catalog management](/docs/sql-query?topic=sql-query-hivemetastore).
 
@@ -3558,7 +3558,7 @@ ALTER TABLE customers_partitioned RECOVER PARTITIONS
 
 To add or remove partitions individually, use the `ADD PARTITION` or `DROP PARTITION` options.
 
-The `ADD PARTITION` option allows you to specify an explicit location for the new partition. This way, you can construct a table from object locations that do not share a common {{site.data.keyword.cos_short}} prefix, or are even located in separate buckets. 
+The `ADD PARTITION` option allows you to specify an explicit location for the new partition. This way, you can construct a table from object locations that do not share a common {{site.data.keyword.cos_short}} prefix, or are even located in separate buckets.
 If the partition location is not specified, it is inferred from the location of the table and the value(s) of the partitioning column(s). `ADD PARTITION` does not validate the specified or inferred location.
 
 
@@ -3587,7 +3587,7 @@ Use the `EXISTS` option to avoid getting errors during `ADD` or `DROP`.
 
 *!<add comment lines here> include-svg src="./svgfiles/analyzeTable.svg" target="./diagrams/analyzeTable.svg" alt="syntax diagram for a analyze table command" layout="@break@" <add comment lines here>*
 
-The `ANALYZE TABLE` statement collects statistics about the specified table and for the specified columns. This information can be used by the query optimizer to improve the query plan. 
+The `ANALYZE TABLE` statement collects statistics about the specified table and for the specified columns. This information can be used by the query optimizer to improve the query plan.
 For example, to decide which table is smaller when you use a broadcast hash join, add those columns that are used in the SELECT statements.
 
 ```sql
@@ -3792,7 +3792,7 @@ DROP METAINDEX ON cos://us-geo/sql/metergen STORED AS parquet
 <img style="max-width: 486px;" usemap="#metaindexRefreshCommandImgMap" alt="syntax diagram for refresh index command" src="./diagrams/metaindexRefreshCommand-fe7e1ada42e0cb1281cabe0090a22afb.svg" />
 </div>
 
-Refresh an existing index based on the objects in the specified {{site.data.keyword.cos_short}} location or on the specified table. 
+Refresh an existing index based on the objects in the specified {{site.data.keyword.cos_short}} location or on the specified table.
 Use the following command if the data changed and you need to update the index:
 
 ```sql
@@ -3814,7 +3814,7 @@ REFRESH METAINDEX ON cos://us-geo/sql/metergen STORED AS parquet
 <img style="max-width: 634px;" usemap="#metaindexDescribeCommandImgMap" alt="syntax diagram for describe index command" src="./diagrams/metaindexDescribeCommand-cd582a9aa24fa0b7102de9804db08535.svg" />
 </div>
 
-Describe an existing index based on the objects in the specified {{site.data.keyword.cos_short}} location or on the specified table. 
+Describe an existing index based on the objects in the specified {{site.data.keyword.cos_short}} location or on the specified table.
 Use the following command to receive information of the index, such as index status, types that are used, location where it is stored, or number of objects processed.
 
 ```sql
@@ -3960,7 +3960,7 @@ The syntax of a table CRN is thoroughly described in section [Table unique resou
 
 <h3 id ="DB2_TABLE_URI">DB2_TABLE_URI</h3>
 
-A Db2 table URI is a string of characters that uniquely identifies a table in an {{site.data.keyword.Db2_on_Cloud_long}} and {{site.data.keyword.dashdblong}} instance. 
+A Db2 table URI is a string of characters that uniquely identifies a table in an {{site.data.keyword.Db2_on_Cloud_long}} and {{site.data.keyword.dashdblong}} instance.
 The instance must be enabled for IAM and the IBMid if the user must be added as a database user.
 
 The syntax of a Db2 Table URI is thoroughly described in section [Table unique resource identifier](/docs/sql-query?topic=sql-query-overview#unique).

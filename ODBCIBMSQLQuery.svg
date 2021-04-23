@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="1080px" viewBox="0 0 1920 1080" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Artboard</title>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="1920" height="1080"></rect>
+        <polygon id="Path" stroke="#2F528F" stroke-width="2" fill="#00B050" points="47.306183 602.126681 78.5969647 570.835899 78.5969647 586.48129 144.543803 586.48129 144.543803 540 325.012666 540 325.012666 586.48129 391.496603 586.48129 391.496603 570.835899 422.787384 602.126681 391.496603 633.417462 391.496603 618.168761 325.012666 618.168761 325.012666 663.597694 144.543803 663.597694 144.543803 618.168761 78.5969647 618.168761 78.5969647 633.417462"></polygon>
+        <polygon id="Path-Copy" stroke="#2F528F" stroke-width="2" fill="#4472C4" points="968.306183 602.126681 999.596965 570.835899 999.596965 586.48129 1055.5438 586.48129 1055.5438 540 1215.01267 540 1215.01267 586.48129 1269.4966 586.48129 1269.4966 570.835899 1300.78738 602.126681 1269.4966 633.417462 1269.4966 618.168761 1215.01267 618.168761 1215.01267 663.597694 1055.5438 663.597694 1055.5438 618.168761 999.596965 618.168761 999.596965 633.417462"></polygon>
+        <text id="ODBC" font-family="IBMPlexSans, IBM Plex Sans" font-size="60" font-weight="normal" letter-spacing="-0.714286" fill="#FFFFFF">
+            <tspan x="157" y="624">ODBC</tspan>
+        </text>
+        <text id="JDBC" font-family="IBMPlexSans, IBM Plex Sans" font-size="60" font-weight="normal" letter-spacing="-0.714286" fill="#FFFFFF">
+            <tspan x="1062" y="624">JDBC</tspan>
+        </text>
+        <rect id="Rectangle-Copy" stroke="#2F528F" stroke-width="2" fill="#4472C4" x="1302" y="201" width="535" height="789"></rect>
+        <text id="IBM-Cloud-SQL-Query" font-family="IBMPlexSans, IBM Plex Sans" font-size="60" font-weight="normal" letter-spacing="-0.714286" fill="#FFFFFF">
+            <tspan x="1374.30286" y="524">IBM Cloud SQL</tspan>
+            <tspan x="1492.25572" y="603">Query</tspan>
+        </text>
+        <text id="IBM-Cloud" font-family="IBMPlexSans, IBM Plex Sans" font-size="60" font-weight="normal" letter-spacing="-0.714286" fill="#FFFFFF">
+            <tspan x="1433.65429" y="756">IBM Cloud</tspan>
+        </text>
+        <rect id="Rectangle" stroke="#2F528F" stroke-width="2" fill="#00B050" x="424" y="201" width="535" height="789"></rect>
+        <text id="Progress-DataDirect" font-family="IBMPlexSans, IBM Plex Sans" font-size="60" font-weight="normal" letter-spacing="-0.714286" fill="#FFFFFF">
+            <tspan x="580.107144" y="442">Progress</tspan>
+            <tspan x="555.29143" y="521">DataDirect</tspan>
+        </text>
+        <text id="Hybrid-Data-Pipeline" font-family="IBMPlexSans, IBM Plex Sans" font-size="60" font-weight="normal" letter-spacing="-0.714286" fill="#FFFFFF">
+            <tspan x="604.652858" y="672">Hybrid</tspan>
+            <tspan x="518.142859" y="751">Data Pipeline</tspan>
+        </text>
+    </g>
+</svg>

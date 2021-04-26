@@ -10,7 +10,6 @@ SQL Query
     whatsnew.md
     hive_metastore.md
     index_management.md
-    event_streams_landing.md
 
     {: .topicgroup}
     Security and compliance

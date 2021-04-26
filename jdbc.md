@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-04-23"
 
 keywords: jdbc
 
@@ -39,7 +39,7 @@ The JDBC URL needs to include the CRN of an {{site.data.keyword.sqlquery_full}} 
 
 `jdbc:ibmcloudsql:{instance-crn}[?{key1}={value1}&{key2}={value2}...]`
 
-The CRN can be obtained from the service dashboard in the IBM Cloud console. The following is an example of a JDBC URL: 
+The CRN can be obtained from the service dashboard in the IBM Cloud console. The following is an example of a JDBC URL:
 
 `jdbc:ibmcloudsql:crn:v1:bluemix:public:sql-query:eu-de:a/290ec9931c0737248f3dc2aa57187d14%3AAf86d20c4-7646-441e-ad4b-182c57008471::?targetcosurl=cos://us-geo/sample-result-bucket/results/`
 
@@ -57,7 +57,7 @@ Connection properties (except for the CRN) can be specified as part of the URL, 
   - Only tables are returned if `filterType` value is set to `table`.
   - Only views are returned if `filterType` value is set to `view`.
 - AppendInto (optional, default *true*):
-  - If it is set to false, no `INTO` clause is appended, and results are not available through the driver. It is used with [ETL-type statements](#etl-type-statements), where the INTO options are provided as part of the statement. 
+  - If it is set to false, no `INTO` clause is appended, and results are not available through the driver. It is used with [ETL-type statements](#etl-type-statements), where the INTO options are provided as part of the statement.
 
 ## Driver functionality
 {: #driver_functionality}
@@ -185,6 +185,19 @@ The following steps describe how to make Tableau Desktop for Windows work with t
 As Tableau does not support complex data types, such as `struct`, if a table contains one or more columns with complex data type, perform the following actions:
 
 - Create a flattened view on the table.
-- You can set the `filterType` option to `view`. This option effectively hides all tables and reveals views only to Tableau. To set the option with the JDBC URL, use the following URL: 
+- You can set the `filterType` option to `view`. This option effectively hides all tables and reveals views only to Tableau. To set the option with the JDBC URL, use the following URL:
 
   `jdbc:ibmcloudsql:{CRN of your {{site.data.keyword.sqlquery_short}} service instance}?targetcosurl={COS location for results}&filterType=view`
+
+## ODBC connectivity using the JDBC driver with Progress Data Direct HDP
+{: #odbc_connectivity}
+
+The JDBC driver enables BI Tools to integrate data on Cloud {{site.data.keyword.cos_short}} into business reports.
+However, some BI tools exist that only provide ODBC connectors but no JDBC connectors.
+If you use such business intelligence tools, you need another way to connect to your data.
+
+An easy way to set up ODBC connectivity to {{site.data.keyword.sqlquery_short}} is to use the [Progress DataDirect Hybrid Data Pipeline](https://www.progress.com/cloud-and-hybrid-data-integration) product.
+
+![Progress DataDirect Hybrid Data Pipeline](ODBCIBMSQLQuery.svg)
+
+There is a [step-by-step tutorial](https://www.ibm.com/cloud/blog/odbc-connectivity-to-ibm-cloud-sql-query) explaining how easily IBM Cloud SQL Query and Hybrid Data Pipeline (HDP) can complement one another to achieve this.

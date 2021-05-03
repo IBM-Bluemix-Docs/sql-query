@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019, 2021
-lastupdated: "2021-03-03"
+lastupdated: "2021-05-03"
 
 keywords: SQL query, time series, SQL function, time reference system, TRS
 
@@ -39,7 +39,7 @@ Consider the following simple time series:
 
 `[(0, 1.0), (1, 2.0), (2, 4.0)]`  
 
-Using a TRS that has a time granularity of 5 minutes and a start time of exactly 50 years ("2020-01-01T00:00") results in the following new set of timestamps:  
+Using a TRS that has a time granularity of 5 minutes and a start time of 50 years past the Unix epoch ("2020-01-01T00:00") results in the following new set of timestamps:  
 
 `[(0=2020-01-01T00:00, 1.0), (1=2020-01-01T00:05, 2.0), (2=2020-01-01T00:10, 4.0)]`  
 

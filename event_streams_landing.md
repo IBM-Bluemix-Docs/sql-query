@@ -61,7 +61,7 @@ EXECUTE AS crn:v1:bluemix:public:kms:us-south:a/33e58e0da6e6926e09fd68480e66078e
 In addition to the objects that are written when you do a [batch query](https://cloud.ibm.com/docs/sql-query?topic=sql-query-overview#result=), the following two objects are also created:
 
 - `_checkpoint`: Do not delete or modify the objects in this structure as it stores the last offsets of the topic.
-- `_schema_as_json: Do not delete or modify the objects in this structure as it stores the schema of the Kafka events.
+- `_schema_as_json`: Do not delete or modify the objects in this structure as it stores the schema of the Kafka events.
 
 The objects are written to Cloud {{site.data.keyword.cos_short}} in micro batches. The number of events included in one object 
 depends on the specified event size and the provision rate of the topic. The same applies to the times when data is written to Cloud {{site.data.keyword.cos_short}}. If the provision rate is high, you see more objects within the same timeframe. If it is low, you see a new object at least every 5 minutes.

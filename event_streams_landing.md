@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-05-07"
+lastupdated: "2021-05-20"
 
 keywords: SQL query, event streams, streaming, cloud object storage, Kafka
 
@@ -16,10 +16,11 @@ subcollection: sql-query
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Kafka {{site.data.keyword.messagehub}} landing
+# Kafka {{site.data.keyword.messagehub}} Landing
 {:event-streams-landing}
 
-{{site.data.keyword.sqlquery_full}} consumes an {{site.data.keyword.messagehub}} topic and writes the events to {{site.data.keyword.cos_full}} as Parquet objects.
+With Stream Landing you can now stream your data in real-time from a topic to a bucket of your choice.
+{{site.data.keyword.sqlquery_full}} connects to {{site.data.keyword.messagehub_full}} and copies the data to Cloud {{site.data.keyword.cos_full}} in Parquet format. This capability enables efficient analytics on the new objects created.
 
 ![Kafka Event Streams landing](streaming_diagram.svg)
 
@@ -27,10 +28,10 @@ You can enable Kafka {{site.data.keyword.messagehub}} landing on the {{site.data
 
 With {{site.data.keyword.sqlquery_short}} you can process up to 1 MB event data per second. The final reached data throughput 
 depends on parameters, such as topic partitions and size and format of the events. For one {{site.data.keyword.sqlquery_short}} instance 
-there is a limit of five concurrent stream landing jobs. The {{site.data.keyword.messagehub}} feature is currently only available for instances created in the US-South region. 
+there is a limit of five concurrent stream landing jobs. The limit can be raised upon request via support ticket. The {{site.data.keyword.messagehub}} feature is currently only available for instances created in the US-South region. 
 
 
-## Usage
+## Using Kafka 
 {:using-event-streams}
 
 For event consumption, {{site.data.keyword.sqlquery_short}} reads data from a Kafka topic with a simple SQL statement, such as the following example:
@@ -79,4 +80,24 @@ The job details show the following metrics (instead of *rows_returned*, *rows_re
 - `last_change_time`: Shows when the last object was written to Cloud {{site.data.keyword.cos_short}}.
 - `rows_per_second`: Shows the number of records that were processed per second in the last micro batch.
 - `last_activity_time`: Shows the time when the streaming job was last active, with or without processing rows.
+
+## Billing example
+{:billing-example}
+
+With a simple capacity metric, you are charged by the hour for each {{site.data.keyword.messagehub}} job enabling you to stream a single topic to a single bucket and then scale up as your workload increases.
+
+For more detailed information on how billing is calculated, see the following examples: 
+
+- 1 topic, 8 partitions, 1 MB ingress costs $0.014 USD per partition hour * 8 * 30 days
+- SQL Query landing costs $0.11 USD per capacity unit hour * 1 * 30 days
+- Cloud {{site.data.keyword.cos_short}}: 30 days * 24 hours * 60 / 1024 /1024 equals to 2.47 TB per month (Standard Plan, US-South, regional) costs $0.0220 * 2.47 + $1 for Class A and Class B requests
+
+
+
+
+
+
+
+
+
 

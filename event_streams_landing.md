@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-05-20"
+lastupdated: "2021-05-21"
 
 keywords: SQL query, event streams, streaming, cloud object storage, Kafka
 
@@ -26,9 +26,14 @@ With Stream Landing you can now stream your data in real-time from a topic to a 
 
 You can enable Kafka {{site.data.keyword.messagehub}} landing on the {{site.data.keyword.messagehub}} UI by selecting the required resources, such as Cloud {{site.data.keyword.cos_short}} bucket, {{site.data.keyword.keymanagementservicelong}} instance and the {{site.data.keyword.sqlquery_short}} instance by using a tailored wizard. In the {{site.data.keyword.sqlquery_short}} UI you have an overview of streaming jobs that are running. If you want to stop the streaming job, you need to switch to the {{site.data.keyword.messagehub}} UI. There you get an overview of which Topic is currently consumed by one or more {{site.data.keyword.sqlquery_short}} instances. For more details on streaming in {{site.data.keyword.messagehub}}, see [Streaming to Cloud Object Storage by using SQL Query](/docs/EventStreams?topic=EventStreams-streaming_cos_sql).
 
-With {{site.data.keyword.sqlquery_short}} you can process up to 1 MB event data per second. The final reached data throughput 
-depends on parameters, such as topic partitions and size and format of the events. For one {{site.data.keyword.sqlquery_short}} instance 
-there is a limit of five concurrent stream landing jobs. The limit can be raised upon request via support ticket. The {{site.data.keyword.messagehub}} feature is currently only available for instances created in the US-South region. 
+## Permissions
+{:permissions-event-streams}
+
+The following permissions are needed for Kafka Landing: 
+
+- Permission to create service-to-service authentication
+- Permission to create service IDs and API keys
+- Permission to write to {{site.data.keyword.keymanagementservicelong}} (to store the API key)
 
 
 ## Using Kafka 
@@ -92,6 +97,12 @@ For more detailed information on how billing is calculated, see the following ex
 - SQL Query landing costs $0.11 USD per capacity unit hour * 1 * 30 days
 - Cloud {{site.data.keyword.cos_short}}: 30 days * 24 hours * 60 / 1024 /1024 equals to 2.47 TB per month (Standard Plan, US-South, regional) costs $0.0220 * 2.47 + $1 for Class A and Class B requests
 
+## Limitations
+{:limitations-streams-landing}
+
+With {{site.data.keyword.sqlquery_short}} you can process up to 1 MB event data per second. The final reached data throughput 
+depends on parameters, such as topic partitions and size and format of the events. For one {{site.data.keyword.sqlquery_short}} instance 
+there is a limit of five concurrent stream landing jobs. The limit can be raised upon request via support ticket. The {{site.data.keyword.messagehub}} feature is currently only available for instances created in the US-South region. 
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-05-27"
 
 keywords: SQL query, event streams, streaming, cloud object storage, Kafka
 
@@ -43,8 +43,6 @@ The difference from a batch query is that the FROM clause now points to a {{site
 The allowed formats of the events are JSON and AVRO. The EMIT specifies the Cloud {{site.data.keyword.cos_short}} bucket 
 and the required format is Parquet. The last option to specify is a valid {{site.data.keyword.keymanagementserviceshort}} key that holds an API key with the permissions to read from {{site.data.keyword.messagehub}} and write to Cloud {{site.data.keyword.cos_short}}. 
 The API key is needed, as in theory, the job can run forever. 
-
-The optional hint parameter, OPTIMIZED EVENT SIZE n BYES, is available to specify the typical size of an event in {{site.data.keyword.sqlquery_short}}. {{site.data.keyword.sqlquery_short}} then uses an optimized micro batch size for the available memory. If you do not know the typical size of an event, {{site.data.keyword.sqlquery_short}} starts to run with a default setting to consume the Kafka events.
 
 ```
 SELECT * FROM crn:v1:bluemix:public:messagehub:us-south:a/2383fabbd90354d33c1abfdf3a9f35d5:4d03d962-bfa5-4dc6-8148-f2f411cb8987::/avrotopic STORED AS AVRO 
@@ -91,12 +89,12 @@ You will see the following in your IBM Cloud useage:
 - Cloud {{site.data.keyword.cos_short}} storage costs: $0.05 per month for each 3.6GB using the smart storage tier class.
 
 Your total cost per hour, with the data subsequently stored for a month, would be approximately: $0.222
-The above is only an example, and you should evaluate your own planned useage with the IBM Cloud cost calculator.
+The above is only an example, and you should evaluate your own planned usage with the IBM Cloud cost calculator.
 
 ## Permissions
 {:permissions-event-streams}
 
-The following permissions are needed for a stream landing job: 
+The following permissions are needed for creating a stream landing job: 
 
 - Permission to create service-to-service authentication
 - Permission to create service IDs and API keys

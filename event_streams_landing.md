@@ -16,7 +16,7 @@ subcollection: sql-query
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Kafka {{site.data.keyword.messagehub}} Landing
+# Stream Landing
 {:event-streams-landing}
 
 With Stream Landing you can now stream your data in real-time from a topic to a bucket of your choice.
@@ -24,12 +24,14 @@ With Stream Landing you can now stream your data in real-time from a topic to a 
 
 ![Kafka Event Streams landing](streaming_diagram.svg)
 
-You can enable Kafka {{site.data.keyword.messagehub}} landing on the {{site.data.keyword.messagehub}} UI by selecting the required resources, such as Cloud {{site.data.keyword.cos_short}} bucket, {{site.data.keyword.keymanagementservicelong}} instance and the {{site.data.keyword.sqlquery_short}} instance by using a tailored wizard. In the {{site.data.keyword.sqlquery_short}} UI you have an overview of streaming jobs that are running. If you want to stop the streaming job, you need to switch to the {{site.data.keyword.messagehub}} UI. There you get an overview of which Topic is currently consumed by one or more {{site.data.keyword.sqlquery_short}} instances. For more details on streaming in {{site.data.keyword.messagehub}}, see [Streaming to Cloud Object Storage by using SQL Query](/docs/EventStreams?topic=EventStreams-streaming_cos_sql).
+You can now enable a stream landing job on the {{site.data.keyword.messagehub}} UI by selecting the required resources, such as Cloud {{site.data.keyword.cos_short}} bucket, {{site.data.keyword.keymanagementservicelong}} instance and the {{site.data.keyword.sqlquery_short}} instance by using a tailored wizard. If you want to stop the streaming job, you need to switch to the {{site.data.keyword.messagehub}} UI. For more details on configuring stream landing in {{site.data.keyword.messagehub}}, see [Streaming to Cloud Object Storage by using SQL Query](/docs/EventStreams?topic=EventStreams-streaming_cos_sql).
 
-## Using Kafka 
+## Using {{site.data.keyword.sqlquery_short}
 {:using-event-streams}
 
-For event consumption, {{site.data.keyword.sqlquery_short}} reads data from a Kafka topic with a simple SQL statement, such as the following example:
+You can also configure a Stream Landing job directly as a SQL Query statement, without using the {{site.data.keyword.messagehub}} UI.
+
+For event consumption, {{site.data.keyword.sqlquery_short}} reads data from a {{site.data.keyword.messagehub}} topic with a simple SQL statement, such as the following example:
 
 ```
 SELECT * FROM crn:v1:bluemix:public:messagehub:us-south:a/2383fabbd90354d33c1abfdf3a9f35d5:4d03d962-bfa5-4dc6-8148-f2f411cb8987::/jsontopic STORED AS JSON 
@@ -37,7 +39,7 @@ EMIT cos://us-south/mybucket/events STORED AS PARQUET
 EXECUTE AS crn:v1:bluemix:public:kms:us-south:a/33e58e0da6e6926e09fd68480e66078e:5195f066-6340-4fa2-b189-6255db72c4f2:key:490c8133-5539-4601-9aa3-1d3a11cb9c44
 ```
 
-The difference is that the FROM clause now points to a Kafka topic by using the CRN of an {{site.data.keyword.messagehub}} instance. 
+The difference from a batch query is that the FROM clause now points to a {{site.data.keyword.messagehub}} topic by using the CRN of an {{site.data.keyword.messagehub}} instance. 
 The allowed formats of the events are JSON and AVRO. The EMIT specifies the Cloud {{site.data.keyword.cos_short}} bucket 
 and the required format is Parquet. The last option to specify is a valid {{site.data.keyword.keymanagementserviceshort}} key that holds an API key with the permissions to read from {{site.data.keyword.messagehub}} and write to Cloud {{site.data.keyword.cos_short}}. 
 The API key is needed, as in theory, the job can run forever. 
@@ -79,18 +81,22 @@ The job details show the following metrics (instead of *rows_returned*, *rows_re
 ## Billing example
 {:billing-example}
 
-With a simple capacity metric, you are charged by the hour for each {{site.data.keyword.messagehub}} job enabling you to stream a single topic to a single bucket and then scale up as your workload increases.
+Consider a simple scenario, where you would like to persist 1MB a second of data in Cloud {{site.data.keyword.cos_short} that originates from {{site.data.keyword.messagehub}}.
 
-For more detailed information on how billing is calculated, see the following examples: 
+You will see the following in your IBM Cloud useage:
+- 1 {{site.data.keyword.messagehub}} topic with 1 partition: $0.014 USD per partition hour
+- {{site.data.keyword.messagehub}} outbound bandwidth charge: $0.028 for 3.6GB data transmitted per hour
+- 1 {{site.data.keyword.sqlquery_short}} stream landing job: $0.11 per hour
+- Cloud {{site.data.keyword.cos_short}} Class A requests for writing data: ~$0.02 per hour
+- Cloud {{site.data.keyword.cos_short}} storage costs: $0.05 per month for each 3.6GB using the smart storage tier class.
 
-- 1 topic, 8 partitions, 1 MB ingress costs $0.014 USD per partition hour * 8 * 30 days
-- SQL Query landing costs $0.11 USD per capacity unit hour * 1 * 30 days
-- Cloud {{site.data.keyword.cos_short}}: 30 days * 24 hours * 60 / 1024 /1024 equals to 2.47 TB per month (Standard Plan, US-South, regional) costs $0.0220 * 2.47 + $1 for Class A and Class B requests
+Your total cost per hour, with the data subsequently stored for a month, would be approximately: $0.222
+The above is only an example, and you should evaluate your own planned useage with the IBM Cloud cost calculator.
 
 ## Permissions
 {:permissions-event-streams}
 
-The following permissions are needed for Kafka Landing: 
+The following permissions are needed for a stream landing job: 
 
 - Permission to create service-to-service authentication
 - Permission to create service IDs and API keys
@@ -99,7 +105,7 @@ The following permissions are needed for Kafka Landing:
 ## Limitations
 {:limitations-streams-landing}
 
-With {{site.data.keyword.sqlquery_short}} you can process up to 1 MB event data per second. The final reached data throughput 
+With a stream landing job you can process up to 1 MB event data per second. The final reached data throughput 
 depends on parameters, such as topic partitions and size and format of the events. For one {{site.data.keyword.sqlquery_short}} instance 
 there is a limit of five concurrent stream landing jobs. The limit can be raised upon request via support ticket. The {{site.data.keyword.messagehub}} feature is currently only available for instances created in the US-South region. 
 

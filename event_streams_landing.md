@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-05-27"
+lastupdated: "2021-06-01"
 
 keywords: SQL query, event streams, streaming, cloud object storage, Kafka
 
@@ -76,19 +76,20 @@ The job details show the following metrics (instead of *rows_returned*, *rows_re
 - `rows_per_second`: Shows the number of records that were processed per second in the last micro batch.
 - `last_activity_time`: Shows the time when the streaming job was last active, with or without processing rows.
 
-## Billing example
-{:billing-example}
+## Estimating cost of stream landing
+{:estimating-cost}
 
-Consider a simple scenario, where you would like to persist 1MB a second of data in Cloud {{site.data.keyword.cos_short} that originates from {{site.data.keyword.messagehub}}.
+To keep the example simple, assume to persist 1MB per second of data in Cloud {{site.data.keyword.cos_short} that originates from {{site.data.keyword.messagehub}}. All pricing in this example is in US currency.
+| ---
+Feature | Price
+--- | ---
+1 {{site.data.keyword.messagehub}} topic with 1 partition | $0.014 USD per partition hour
+{{site.data.keyword.messagehub}} outbound bandwidth charge  | $0.028 for 3.6GB data transmitted per hour
+1 {{site.data.keyword.sqlquery_short}} stream landing job | $0.11 per hour
+Cloud {{site.data.keyword.cos_short}} Class A requests for writing data | ~$0.02 per hour
+Cloud {{site.data.keyword.cos_short}} storage costs | $0.05 per month for each 3.6GB using the smart storage tier class
 
-You will see the following in your IBM Cloud useage:
-- 1 {{site.data.keyword.messagehub}} topic with 1 partition: $0.014 USD per partition hour
-- {{site.data.keyword.messagehub}} outbound bandwidth charge: $0.028 for 3.6GB data transmitted per hour
-- 1 {{site.data.keyword.sqlquery_short}} stream landing job: $0.11 per hour
-- Cloud {{site.data.keyword.cos_short}} Class A requests for writing data: ~$0.02 per hour
-- Cloud {{site.data.keyword.cos_short}} storage costs: $0.05 per month for each 3.6GB using the smart storage tier class.
-
-Your total cost per hour, with the data subsequently stored for a month, would be approximately: $0.222
+Your total cost per hour, with the data subsequently stored for a month, would be approximately: $0.222.
 The above is only an example, and you should evaluate your own planned usage with the IBM Cloud cost calculator.
 
 ## Permissions

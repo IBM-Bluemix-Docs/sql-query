@@ -80,7 +80,7 @@ The job details show the following metrics (instead of *rows_returned*, *rows_re
 {:estimating-cost}
 
 To keep the example simple, assume to persist 1MB per second of data in Cloud {{site.data.keyword.cos_short} that originates from {{site.data.keyword.messagehub}}. All pricing in this example is in US currency.
-| ---
+
 Feature | Price
 --- | ---
 1 {{site.data.keyword.messagehub}} topic with 1 partition | $0.014 USD per partition hour

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-06-01"
+lastupdated: "2021-06-04"
 
 keywords: SQL query, event streams, streaming, cloud object storage, Kafka
 
@@ -16,22 +16,22 @@ subcollection: sql-query
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Stream Landing
+# Stream landing
 {:event-streams-landing}
 
-With Stream Landing you can now stream your data in real-time from a topic to a bucket of your choice.
+With stream landing you can now stream your data in real-time from a topic to a bucket of your choice.
 {{site.data.keyword.sqlquery_full}} connects to {{site.data.keyword.messagehub_full}} and copies the data to Cloud {{site.data.keyword.cos_full}} in Parquet format. This capability enables efficient analytics on the new objects created.
 
 ![Kafka Event Streams landing](streaming_diagram.svg)
 
 You can now enable a stream landing job on the {{site.data.keyword.messagehub}} UI by selecting the required resources, such as Cloud {{site.data.keyword.cos_short}} bucket, {{site.data.keyword.keymanagementservicelong}} instance and the {{site.data.keyword.sqlquery_short}} instance by using a tailored wizard. If you want to stop the streaming job, you need to switch to the {{site.data.keyword.messagehub}} UI. For more details on configuring stream landing in {{site.data.keyword.messagehub}}, see [Streaming to Cloud Object Storage by using SQL Query](/docs/EventStreams?topic=EventStreams-streaming_cos_sql).
 
-## Using {{site.data.keyword.sqlquery_short}
+## Using {{site.data.keyword.sqlquery_short}}
 {:using-event-streams}
 
-You can also configure a Stream Landing job directly as a SQL Query statement, without using the {{site.data.keyword.messagehub}} UI.
+You can also configure a stream landing job directly as a SQL Query statement, without using the {{site.data.keyword.messagehub}} UI.
 
-For event consumption, {{site.data.keyword.sqlquery_short}} reads data from a {{site.data.keyword.messagehub}} topic with a simple SQL statement, such as the following example:
+For event consumption, {{site.data.keyword.sqlquery_short}} reads data from an {{site.data.keyword.messagehub}} topic with a simple SQL statement, such as the following example:
 
 ```
 SELECT * FROM crn:v1:bluemix:public:messagehub:us-south:a/2383fabbd90354d33c1abfdf3a9f35d5:4d03d962-bfa5-4dc6-8148-f2f411cb8987::/jsontopic STORED AS JSON 

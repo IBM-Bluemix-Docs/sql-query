@@ -2,7 +2,7 @@
 
 copyright:
   year: 2018, 2021
-lastupdated: "2021-02-22"
+lastupdated: "2021-06-08"
 
 keywords: activity tracker, activity, event
 
@@ -27,7 +27,7 @@ Use the {{site.data.keyword.at_full}} service to track how users and application
 The {{site.data.keyword.at_full_notm}} service records user-initiated activities that change the state of a service in {{site.data.keyword.cloud}}.
 For more information, see [Getting started with {{site.data.keyword.at_short}}](/docs/Activity-Tracker-with-LogDNA?topic=Activity-Tracker-with-LogDNA-getting-started).
 
-##List of events
+## List of events
 {: #events}
 
 The following table lists the actions that generate an event:

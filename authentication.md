@@ -2,7 +2,7 @@
 
 copyright:
   year: 2018, 2021
-lastupdated: "2021-02-22"
+lastupdated: "2021-06-08"
 
 keywords: security, authentication, access, iam, sso, service credential
 
@@ -55,7 +55,7 @@ As an alternative to providing user and password combinations, in {{site.data.ke
 To ensure that the passing of sensitive data is secure, first store the API key as a custom standard key in a 
 {{site.data.keyword.keymanagementserviceshort}} service instance to which you have access, and then use the CRN of this custom standard key instead of the plain text password. For more information, see [Setting up custom secrets in Key Protect](#kpsetup) on how to store the API key securely.
 
-### Currently supported authentication methods per data resource
+### Currently supported authentication methods per data resource for {{site.data.keyword.sqlquery_short}}
 {: #supportedauthentication}
 
 | Authentication method                 | {{site.data.keyword.cos_full}}   | {{site.data.keyword.Db2_on_Cloud_long}}  | {{site.data.keyword.dashdblong}} |

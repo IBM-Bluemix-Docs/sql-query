@@ -2,7 +2,7 @@
 
 copyright:
   year: 2018, 2021
-lastupdated: "2021-02-22"
+lastupdated: "2021-06-08"
 
 keywords: activity tracker, activity, event
 
@@ -24,10 +24,13 @@ subcollection: sql-query
 
 Use the {{site.data.keyword.at_full}} service to track how users and applications interact with {{site.data.keyword.sqlquery_full}}.
 
-The {{site.data.keyword.at_full_notm}} service records user-initiated activities that change the state of a service in {{site.data.keyword.cloud}}.
-For more information, see [Getting started with {{site.data.keyword.at_short}}](/docs/Activity-Tracker-with-LogDNA?topic=Activity-Tracker-with-LogDNA-getting-started).
+The {{site.data.keyword.at_full_notm}} service records user-initiated activities that change the state of a service in {{site.data.keyword.cloud}}. For more information, see [Getting started with {{site.data.keyword.at_short}}](/docs/Activity-Tracker-with-LogDNA?topic=Activity-Tracker-with-LogDNA-getting-started).
 
-##List of events
+You can use the {{site.data.keyword.sqlquery_short}} service to query {{site.data.keyword.at_short}} archive files that are stored in an {{site.data.keyword.cos_short}} bucket in your account. For more information, see [Searching archive data by using the SQL Query service](/docs/activity-tracker?topic=activity-tracker-sqlquery).
+
+You can search activity tracker events with {{site.data.keyword.sqlquery_short}}
+
+## List of events
 {: #events}
 
 The following table lists the actions that generate an event:

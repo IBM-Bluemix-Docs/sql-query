@@ -2,7 +2,7 @@
 
 copyright:
   year: 2018, 2021
-lastupdated: "2021-02-22"
+lastupdated: "2021-06-08"
 
 keywords: security, authentication, access, iam, sso, service credential
 
@@ -24,10 +24,17 @@ subcollection: sql-query
 The {{site.data.keyword.sqlquery_full}} service is tightly integrated with {{site.data.keyword.iamlong}} (IAM). 
 In order to perform an action by using the {{site.data.keyword.sqlquery_short}} user interface or API, you require an IAM user ID, which is an IBM ID with an IBM Cloud account. {{site.data.keyword.sqlquery_short}} then verifies whether you are authorized to work with the service instance.
 
+## {{site.data.keyword.iamshort}} (IAM) session support
+{: #iam}
+
+The {{site.data.keyword.sqlquery_short}} UI supports IAM sessions. If you limit the duration of active sessions, the authentication of the UI will stop after the session expires, so you cannot submit new queries or retrieve result data until you reload the page and re-authenticate. Result data that is already cached in the browser remains visible. If you terminate an active IAM session before it expires, the {{site.data.keyword.sqlquery_short}} UI still remains authenticated for the leftover lifetime of the current access token, which can be up to 20 minutes.
+
+Queries submitted from the UI can run at maximum for one hour or the remaining session lifetime, whichever is shorter. Queries submitted via the API can always run for one hour maximum if you retrieve the API token using the method described in the SQL Query API documentation.
+
 ## Authenticating access to data resources in SQL Query
 {: #accessauthentication}
 
-### SSO through {{site.data.keyword.iamlong}} (IAM)
+### SSO through {{site.data.keyword.iamshort}}
 {: #iamsso}
 
 IAM is also the preferred and the default mechanism for authenticating access to downstream data resources that are referenced by your SQL queries. If you use IAM, ensure that the user ID that you use to submit the SQL query through the web console or the API is authorized to read the input locations (referenced in the `FROM` clauses of the query), and to write the result set to the target location (referenced in the `INTO` clause of the query). 
@@ -55,7 +62,7 @@ As an alternative to providing user and password combinations, in {{site.data.ke
 To ensure that the passing of sensitive data is secure, first store the API key as a custom standard key in a 
 {{site.data.keyword.keymanagementserviceshort}} service instance to which you have access, and then use the CRN of this custom standard key instead of the plain text password. For more information, see [Setting up custom secrets in Key Protect](#kpsetup) on how to store the API key securely.
 
-### Currently supported authentication methods per data resource
+### Currently supported authentication methods per data resource for {{site.data.keyword.sqlquery_short}}
 {: #supportedauthentication}
 
 | Authentication method                 | {{site.data.keyword.cos_full}}   | {{site.data.keyword.Db2_on_Cloud_long}}  | {{site.data.keyword.dashdblong}} |

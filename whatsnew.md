@@ -20,7 +20,7 @@ subcollection: sql-query
 -->
 
 ## June 2021
-- {{site.data.keyword.sqlquery_long}} now supports stream landing that enables you to stream your data in real-time from a topic to a bucket of your choice. This capability enables efficient analytics on the new objects created.
+- {{site.data.keyword.sqlquery_full}} now supports stream landing that enables you to stream your data in real-time from a topic to a bucket of your choice. This capability enables efficient analytics on the new objects created.
 
 ## December 2020
 - {{site.data.keyword.sqlquery_short}} is available in Chennai, India. When you provision new instances, you can select whether it is being provisioned in Dallas, Frankfurt, or Chennai.

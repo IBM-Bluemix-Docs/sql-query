@@ -313,7 +313,7 @@ For Availability Service Level Agreements, see the [Cloud Services terms](http:/
 ### REST API
 {: #restapi}
 
-You can use the [SQL Query service REST API](https://cloud.ibm.com/apidocs/sql-query) to run queries and retrieve information about their status. This is especially helpful when you write code that automatically queries data.
+You can use the [SQL Query service REST API](https://cloud.ibm.com/apidocs/sql-query/sql-query-v3) to run queries and retrieve information about their status. This is especially helpful when you write code that automatically queries data.
 
 **Note:** The Cloud Resource Name (CRN) is a mandatory part of an {{site.data.keyword.sqlquery_short}} REST endpoint call. The CRN Copy radio button copies your CRN to clipboard and you can paste it into your API call.
 

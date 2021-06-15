@@ -2,7 +2,7 @@
 
 copyright:
   year: 2018, 2021
-lastupdated: "2021-06-08"
+lastupdated: "2021-06-15"
 
 keywords: security, authentication, access, iam, sso, service credential
 
@@ -27,7 +27,7 @@ In order to perform an action by using the {{site.data.keyword.sqlquery_short}} 
 ## {{site.data.keyword.iamshort}} (IAM) session support
 {: #iam}
 
-The {{site.data.keyword.sqlquery_short}} UI supports IAM sessions. If you limit the duration of active sessions, the authentication of the UI will stop after the session expires, so you cannot submit new queries or retrieve result data until you reload the page and re-authenticate. Result data that is already cached in the browser remains visible. If you terminate an active IAM session before it expires, the {{site.data.keyword.sqlquery_short}} UI still remains authenticated for the leftover lifetime of the current access token, which can be up to 20 minutes.
+The {{site.data.keyword.sqlquery_short}} UI supports [IAM sessions](/docs/account?topic=account-iam-work-sessions). If you limit the duration of active sessions, the authentication of the UI will stop after the session expires, so you cannot submit new queries or retrieve result data until you reload the page and re-authenticate. Result data that is already cached in the browser remains visible. If you terminate an active IAM session before it expires, the {{site.data.keyword.sqlquery_short}} UI still remains authenticated for the leftover lifetime of the current access token, which can be up to 20 minutes.
 
 Queries submitted from the UI can run at maximum for one hour or the remaining session lifetime, whichever is shorter. Queries submitted via the API can always run for one hour maximum if you retrieve the API token using the method described in the SQL Query API documentation.
 

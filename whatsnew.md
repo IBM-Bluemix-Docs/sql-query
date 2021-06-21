@@ -3,7 +3,7 @@
 copyright:
   year: 2018, 2021
 
-lastupdated: "2021-06-09"
+lastupdated: "2021-06-17"
 
 
 keywords: what's new, support, release, beta
@@ -20,7 +20,8 @@ subcollection: sql-query
 -->
 
 ## June 2021
-- {{site.data.keyword.sqlquery_full}} now supports stream landing that enables you to stream your data in real-time from a topic to a bucket of your choice. This capability enables efficient analytics on the new objects created.
+- The {{site.data.keyword.sqlquery_full}} UI can now display Parquet results, in addition to CSV and JSON data.
+- {{site.data.keyword.sqlquery_short}} now supports stream landing that enables you to stream your data in real-time from a topic to a bucket of your choice. This capability enables efficient analytics on the new objects created.
 
 ## December 2020
 - {{site.data.keyword.sqlquery_short}} is available in Chennai, India. When you provision new instances, you can select whether it is being provisioned in Dallas, Frankfurt, or Chennai.

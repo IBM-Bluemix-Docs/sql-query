@@ -10,7 +10,7 @@ SQL Query
     whatsnew.md
     hive_metastore.md
     index_management.md
-    event_streams_landing.md    
+    event_streams_landing.md
 
     {: .topicgroup}
     Security and compliance
@@ -23,20 +23,20 @@ SQL Query
     {: .navgroup id="reference"}
     sqlref/sql_reference.md
     sqlref/sql_functions.md
-    [API reference](https://cloud.ibm.com/apidocs/sql-query)
+    [API reference](https://cloud.ibm.com/apidocs/sql-query-v3)
     sqlref/geospatial.md
 
     {: .topicgroup}
     Time series functions
         sqlref/timeseries_intro.md
         sqlref/timeseries_trs.md
-        sqlref/timeseries_datatypes.md	
+        sqlref/timeseries_datatypes.md
         sqlref/timeseries_develop.md
         sqlref/timeseries_common.md
         sqlref/timeseries_matching.md
         sqlref/timeseries_join.md
-        sqlref/timeseries_functions.md	
-        sqlref/timeseries_functions_artifact.md	
+        sqlref/timeseries_functions.md
+        sqlref/timeseries_functions_artifact.md
         sqlref/timeseries_functions_dataproc.md
 
     activity.md
@@ -60,7 +60,7 @@ SQL Query
 
     disaster_recovery.md
     faq.md
-    
+
     {: .topicgroup}
     Enhancing security
         deployment_model.md

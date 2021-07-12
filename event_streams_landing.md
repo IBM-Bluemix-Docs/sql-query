@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-06-04"
+lastupdated: "2021-07-09"
 
 keywords: SQL query, event streams, streaming, cloud object storage, Kafka
 
@@ -97,9 +97,11 @@ The above is only an example, and you should evaluate your own planned usage wit
 
 The following permissions are needed for creating a stream landing job: 
 
-- Permission to create service-to-service authentication
-- Permission to create service IDs and API keys
-- Permission to write to {{site.data.keyword.keymanagementservicelong}} (to store the API key)
+- Permission to create service-to-service authentication.
+- Permission to create service IDs and API keys.
+- Permission to write to {{site.data.keyword.keymanagementservicelong}} (to store the API key).
+- Reader access role for the cluster, topic and group resources within the {{site.data.keyword.messagehub}} service instance (or a Reader access role for the service instance as a whole).
+- Writer role for the Cloud {{site.data.keyword.cos_short}} bucket.
 
 ## Limitations
 {:limitations-streams-landing}

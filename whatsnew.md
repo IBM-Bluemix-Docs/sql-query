@@ -19,6 +19,9 @@ subcollection: sql-query
   to trigger an update of the UI build that will make users aware of the new information
 -->
 
+## July 2021
+- A detailed [getting started tutorial](https://www.ibm.com/cloud/blog/stream-landing-from-event-streams-kafka-service-to-ibm-cloud-data-lake-on-object-storage) for stream landing with {{site.data.keyword.sqlquery_full}} is now available.
+
 ## June 2021
 <!--- The {{site.data.keyword.sqlquery_full}} UI can now display Parquet results, in addition to CSV and JSON data. --->
 - {{site.data.keyword.sqlquery_full}} now supports stream landing that enables you to stream your data in real-time from a topic to a bucket of your choice. This capability enables efficient analytics on the new objects created.

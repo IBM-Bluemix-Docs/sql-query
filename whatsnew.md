@@ -3,7 +3,7 @@
 copyright:
   year: 2018, 2021
 
-lastupdated: "2021-06-24"
+lastupdated: "2021-07-13"
 
 
 keywords: what's new, support, release, beta
@@ -24,7 +24,7 @@ subcollection: sql-query
 
 ## June 2021
 <!--- The {{site.data.keyword.sqlquery_full}} UI can now display Parquet results, in addition to CSV and JSON data. --->
-- {{site.data.keyword.sqlquery_full}} now supports stream landing that enables you to stream your data in real-time from a topic to a bucket of your choice. This capability enables efficient analytics on the new objects created.
+- {{site.data.keyword.sqlquery_short} now supports stream landing that enables you to stream your data in real-time from a topic to a bucket of your choice. This capability enables efficient analytics on the new objects created.
 - {{site.data.keyword.cpd_full}} now comes with an integrated connector to {{site.data.keyword.sqlquery_short}} that allows to connect to cloud data lakes and import data assets into projects and catalogs in {{site.data.keyword.cpd_short}}. For more information, see [Connecting to a Cloud Data Lake with IBM Cloud Pak for Data](https://www.ibm.com/cloud/blog/connecting-to-a-cloud-data-lake-with-ibm-cloud-pak-for-data).
 
 ## December 2020

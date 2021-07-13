@@ -23,5 +23,7 @@ subcollection: sql-query
 {: #stream_landing_es_cos}
 
 {{site.data.keyword.messagehub}} is directly integrated with the {{site.data.keyword.sqlquery_full}} service. The [Stream landing tutorial](https://www.ibm.com/cloud/blog/stream-landing-from-event-streams-kafka-service-to-ibm-cloud-data-lake-on-object-storage) 
-is a getting started guide showing you how to run a fully-managed stream data ingestion from Kafka into Parquet on {{site.data.keyword.cos_full}}.
+is a getting started guide showing you how to run a fully-managed stream data ingestion from the {{site.data.keyword.messagehub_full}}
+service into {{site.data.keyword.bluemix}} Data Cloud on {{site.data.keyword.cos_full}}.
+
 

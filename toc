@@ -57,7 +57,7 @@ SQL Query
         geospatial_analytics.md
         microservice.md
         db2.md
-        stream_landing_guide.md
+        streams_landing_guide.md
 
     disaster_recovery.md
     faq.md

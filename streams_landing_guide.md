@@ -19,7 +19,7 @@ subcollection: sql-query
 
 
 
-# Stream landing from Event Streams to IBM Cloud Data Lake on Cloud Object Storage
+# Stream landing from Event Streams to Cloud Object Storage
 {: #stream_landing_es_cos}
 
 {{site.data.keyword.messagehub}} is directly integrated with the {{site.data.keyword.sqlquery_full}} service. The [Stream landing tutorial](https://www.ibm.com/cloud/blog/stream-landing-from-event-streams-kafka-service-to-ibm-cloud-data-lake-on-object-storage) 

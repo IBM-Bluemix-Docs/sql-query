@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-07-16"
+lastupdated: "2021-07-19"
 
 keywords: jdbc
 
@@ -47,16 +47,16 @@ You can also easily obtain the JDBC URL from the {{site.data.keyword.sqlquery_sh
 
 Connection properties (except for the CRN) can be specified as part of the URL, separated by `&`, or through the Java connection properties object. The following properties are supported:
 
-- `Password` (required): IBM Cloud API key for running the queries. It must start with a lowercase letter.
-- `User` (optional): A username is not required and is ignored if given. It must start with a lowercase letter.
-- `Targetcosurl` (optional, but usually needed): Cloud {{site.data.keyword.cos_short}} URI in SQL query style, where the results are stored. If this property is not specified, you cannot run queries that return a JDBC result set. The JDBC connection can still be used to retrieve database metadata and run DDL and [ETL-type statements](#etl-type-statements). It must start with a lowercase letter.
-- `LoggerFile` (optional, default none): file to write driver logs to.
-- `LoggerLevel` (optional, default set by Java SE Development Kit): java.util.logging level for the driver. Java SE Development Kit default is usually `INFO`.
+- `password` (required): IBM Cloud API key for running the queries. The property name must start with a lowercase letter.
+- `user` (optional): A username is not required and is ignored if given. It must start with a lowercase letter.
+- `targetcosurl` (optional, but usually needed): Cloud {{site.data.keyword.cos_short}} URI in SQL query style, where the results are stored. If this property is not specified, you cannot run queries that return a JDBC result set. The JDBC connection can still be used to retrieve database metadata and run DDL and [ETL-type statements](#etl-type-statements). It must start with a lowercase letter.
+- `loggerFile` (optional, default none): file to write driver logs to.
+- `loggerLevel` (optional, default set by Java SE Development Kit): `java.util.logging` level for the driver. Java SE Development Kit default is usually `INFO`.
   - `DEBUG/FINER` or `TRACE/FINEST` are the most useful values.
-- `FilterType` (optional, default none):
+- `filterType` (optional, default none):
   - Only tables are returned if `filterType` value is set to `table`.
   - Only views are returned if `filterType` value is set to `view`.
-- `AppendInto` (optional, default *true*):
+- `appendInto` (optional, default *true*):
   - If it is set to false, no `INTO` clause is appended, and results are not available through the driver. It is used with [ETL-type statements](#etl-type-statements), where the INTO options are provided as part of the statement.
 
 ## Driver functionality
@@ -119,9 +119,9 @@ You cannot run statements with an `INTO` clause by using the generic `Statement.
 ## JDBC driver logging
 {: #jdbc_driver_logging}
 
-JDBC driver logging uses the java.util.logging framework, similar to the [postgresql JDBC driver] (https://jdbc.postgresql.org/documentation/head/logging.html). However, since driver version 2.5.30, logging is turned off by default to avoid unexpected console output in a default logging configuration. To turn logging on, use the connection property `loggerLevel`:
+JDBC driver logging uses the java.util.logging framework, similar to the [postgresql JDBC driver](https://jdbc.postgresql.org/documentation/head/logging.html). However, since driver version 2.5.30, logging is turned off by default to avoid unexpected console output in a default logging configuration. To turn logging on, use the connection property `loggerLevel`:
 
-Set `loggerLevel` to an explicit log level name, such as INFO, to configure that log level for the driver base logger  com.ibm.cloud.sql.jdbc.
+Set `loggerLevel` to an explicit log level name, such as INFO, to configure that log level for the driver base logger `com.ibm.cloud.sql.jdbc`.
 Set `loggerLevel` to the value default to respect the `existing java.util.logging` configuration without overriding the base logger level. Java™ SE Development Kit default is usually to log to the console at INFO level, but you can [set log levels and log destinations with a configuration file](https://docs.oracle.com/javase/8/docs/api/java/util/logging/LogManager.html). The file name must be specified as Java system property `-D java.util.logging.config.file=<path>`.
 Not setting the `loggerLevel` property is equivalent to setting the value to `OFF` explicitly.
 For convenience, and in cases where JVM system properties are not under your control, there is an additional connection property `loggerFile` to control the log destination. This property installs a file handler for the driver base logger. For example, append `&loggerLevel=debug&loggerFile=/tmp/sqlquery.log` to the JDBC URL to create detailed logging output in files `/tmp/sqlquery.log.<n>`
